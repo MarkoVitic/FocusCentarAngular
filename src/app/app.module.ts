@@ -10,7 +10,15 @@ import { ProfessorsComponent } from './components/professors/professors.componen
 import { SubjetsComponent } from './components/subjets/subjets.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { StudentsComponent } from './components/students/students.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
+import { FormProfessorsComponent } from './formComponents/form-professors/form-professors.component';
+import { FormStudentsComponent } from './formComponents/form-students/form-students.component';
+import { FormSubjetsComponent } from './formComponents/form-subjets/form-subjets.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,9 +27,18 @@ import { HttpClientModule } from '@angular/common/http';
     SubjetsComponent,
     PaymentsComponent,
     StudentsComponent,
+    FormProfessorsComponent,
+    FormStudentsComponent,
+    FormSubjetsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [provideClientHydration()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

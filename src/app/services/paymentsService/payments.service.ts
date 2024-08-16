@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Payments } from '../../models/payments';
 import { HttpClient } from '@angular/common/http';
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaymentsService {
-  private apiUrl = 'http://127.0.0.1:3000/payments';
+  private apiUrl = environment.apiUrl + '/payments';
 
   private Payments: Payments[] = [];
 

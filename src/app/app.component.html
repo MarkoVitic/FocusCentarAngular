@@ -3,6 +3,7 @@
     class="w-25 bg-primary d-flex py-6 p-4 flex-column justify-contenet-center align-items-center col-4 row g-4"
     style="height: 100vh"
   >
+    <h2 class="mb-5">Focus Centar</h2>
     <h3>Profesori</h3>
     <h3>Predmeti</h3>
     <h3>Ucenici</h3>
@@ -19,10 +20,11 @@
         type="text"
         placeholder="Pretraga"
       />
-      <button>Pretrazi</button>
+      <button class="mx-3">Pretrazi</button>
     </div>
 
     <!--Ovaj dio ce da bude aktivan u zavisnosti od toga na sta se klikne u heder-->
     <app-professors class="p-4 mt-4"></app-professors>
+    <app-form-professors class="p-4 mt-4"></app-form-professors>
   </div>
 </router-outlet>

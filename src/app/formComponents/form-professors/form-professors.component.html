@@ -1,0 +1,58 @@
+<h2 class="mb-5">Dodavanje Profesora</h2>
+
+<form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Ime i Prezime Profesora</label>
+    <input type="text" formControlName="ImePrezimeProfesor" />
+    <div
+      *ngIf="
+        professorForm.get('ImePrezimeProfesor')?.invalid &&
+        professorForm.get('ImePrezimeProfesor')?.touched
+      "
+    >
+      Unesite Ime i Prezime
+    </div>
+  </div>
+  <div>
+    <label>Kontakt Profesora</label>
+    <input type="number" formControlName="kontaktProfesor" />
+    <div
+      *ngIf="
+        professorForm.get('kontaktProfesor')?.invalid &&
+        professorForm.get('kontaktProfesor')?.touched
+      "
+    >
+      Unesite Kontakt Telefon
+    </div>
+  </div>
+  <div>
+    <label>Email Profesora</label>
+    <input type="email" formControlName="emailProfesor" />
+    <div
+      *ngIf="
+        professorForm.get('emailProfesor')?.invalid &&
+        professorForm.get('emailProfesor')?.touched
+      "
+    >
+      Unesite Validan email
+    </div>
+  </div>
+  <div>
+    <label>Adresa Profesora</label>
+    <input type="text" formControlName="adresaProfesor" />
+  </div>
+  <div>
+    <label>Procenat Profesora</label>
+    <input type="number" formControlName="procenatProfesor" />
+    <div
+      *ngIf="
+        professorForm.get('procenatProfesor')?.invalid &&
+        professorForm.get('procenatProfesor')?.touched
+      "
+    >
+      Unesite Procenat Profesora
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="professorForm.invalid">Dodaj</button>
+</form>

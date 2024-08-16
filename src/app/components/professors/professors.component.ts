@@ -9,12 +9,12 @@ import { ProfessorsService } from '../../services/professorService/professors.se
 })
 export class ProfessorsComponent implements OnInit {
   professors: Professors[] = [];
-  professorOne: Professors;
+  professorOne: Professors = new Professors();
 
   constructor(private professorsService: ProfessorsService) {}
   ngOnInit(): void {
     this.getAllProfessors();
-    this.getOneProfessor(7);
+    this.getOneProfessor(2);
   }
 
   getAllProfessors() {
@@ -26,5 +26,14 @@ export class ProfessorsComponent implements OnInit {
     this.professorsService
       .getOneProfessor(id)
       .subscribe((professor) => (this.professorOne = professor));
+  }
+  updateProfessor(id: number, professor: Professors) {
+    this.professorsService.updateProfessor(id, professor).subscribe();
+  }
+  deleteProfessor(id: number) {
+    this.professorsService.deleteProfessor(id).subscribe();
+  }
+  createProfessor(professor: Professors) {
+    this.professorsService.createProfessor(professor).subscribe();
   }
 }

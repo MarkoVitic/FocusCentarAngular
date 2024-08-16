@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Subjets } from '../../models/subjets';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubjetsService {
-  private apiUrl = 'http://127.0.0.1:3000/subjets';
+  private apiUrl = environment.apiUrl + '/subjets';
 
   private Subjets: Subjets[] = [];
 
