@@ -22,7 +22,7 @@ export class StudentsService {
     return this.http.get<Students>(this.apiUrl + `/${id}`);
   }
   createStudent(student: Students) {
-    return this.http.post<Students>(this.apiUrl, `${student}`);
+    return this.http.post<Students>(this.apiUrl, student);
   }
   updateStudent(id: number, student: Students) {
     return this.http.put<Students>(this.apiUrl + `$/{id}`, student);

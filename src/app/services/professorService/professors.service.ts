@@ -23,10 +23,10 @@ export class ProfessorsService {
   }
   createProfessor(professor: Professors): Observable<Professors> {
     console.log(professor);
-    return this.http.post<Professors>(this.apiUrl, `${professor}`);
+    return this.http.post<Professors>(this.apiUrl, professor);
   }
   updateProfessor(id: number, professor: Professors) {
-    return this.http.put<Professors>(this.apiUrl + `$/{id}`, professor);
+    return this.http.put<Professors>(this.apiUrl + `/${id}`, professor);
   }
   deleteProfessor(id: number) {
     return this.http.delete(this.apiUrl + `/${id}`);

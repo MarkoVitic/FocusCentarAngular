@@ -22,7 +22,7 @@ export class PaymentsService {
     return this.http.get<Payments>(this.apiUrl + `/${id}`);
   }
   createPayment(payment: Payments) {
-    return this.http.post<Payments>(this.apiUrl, `${payment}`);
+    return this.http.post<Payments>(this.apiUrl, payment);
   }
   updatePayment(id: number, payment: Payments) {
     return this.http.put<Payments>(this.apiUrl + `$/{id}`, payment);

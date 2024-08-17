@@ -22,7 +22,7 @@ export class SubjetsService {
     return this.http.get<Subjets>(this.apiUrl + `/${id}`);
   }
   createSubjets(subject: Subjets) {
-    return this.http.post<Subjets>(this.apiUrl, `${subject}`);
+    return this.http.post<Subjets>(this.apiUrl, subject);
   }
   updateSubjet(id: number, subject: Subjets) {
     return this.http.put<Subjets>(this.apiUrl + `$/{id}`, subject);

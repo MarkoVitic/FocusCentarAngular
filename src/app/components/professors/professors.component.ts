@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Professors } from '../../models/professors';
 import { ProfessorsService } from '../../services/professorService/professors.service';
+import { Router } from 'express';
 
 @Component({
   selector: 'app-professors',
@@ -27,9 +28,7 @@ export class ProfessorsComponent implements OnInit {
       .getOneProfessor(id)
       .subscribe((professor) => (this.professorOne = professor));
   }
-  updateProfessor(id: number, professor: Professors) {
-    this.professorsService.updateProfessor(id, professor).subscribe();
-  }
+
   deleteProfessor(id: number) {
     this.professorsService.deleteProfessor(id).subscribe();
   }

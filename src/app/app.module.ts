@@ -19,6 +19,7 @@ import { FormProfessorsComponent } from './formComponents/form-professors/form-p
 import { FormStudentsComponent } from './formComponents/form-students/form-students.component';
 import { FormSubjetsComponent } from './formComponents/form-subjets/form-subjets.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   providers: [provideClientHydration(), provideHttpClient(withFetch())],
   bootstrap: [AppComponent],

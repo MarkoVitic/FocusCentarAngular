@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfessorsService } from '../../services/professorService/professors.service';
 import { Professors } from '../../models/professors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { group } from 'console';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-form-professors',
   templateUrl: './form-professors.component.html',
@@ -11,12 +11,16 @@ import { group } from 'console';
 export class FormProfessorsComponent implements OnInit {
   professorForm: FormGroup = new FormGroup({});
   professor: Professors = new Professors();
+  idProfessor: number;
 
   constructor(
     private professorsService: ProfessorsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
+    // Form of Professor
     this.professorForm = this.formBuilder.group({
       ImePrezimeProfesor: ['', Validators.required],
       kontaktProfesor: ['', Validators.required],
@@ -24,15 +28,35 @@ export class FormProfessorsComponent implements OnInit {
       adresaProfesor: [''],
       procenatProfesor: ['', Validators.required],
     });
+    //Cheking for Paras is there any
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(id);
+    if (id) {
+      this.idProfessor = parseInt(id);
+      let professor = this.professorsService
+        .getOneProfessor(parseInt(id))
+        .subscribe((professor: any) => {
+          console.log(professor);
+          this.professorForm.patchValue(professor);
+        });
+    }
   }
 
   onSubmit() {
     if (this.professorForm.valid) {
-      console.log(this.professorForm.value);
-      this.professorsService
-        .createProfessor(this.professorForm.value)
-        .subscribe();
-      this.professorForm.reset();
+      if (!this.idProfessor) {
+        this.professorsService
+          .createProfessor(this.professorForm.value)
+          .subscribe();
+        this.router.navigate(['/professors']);
+      } else {
+        console.log(this.professorForm.value);
+        this.professorsService
+          .updateProfessor(this.idProfessor, this.professorForm.value)
+          .subscribe();
+        this.router.navigate(['/professors']);
+      }
     }
+    this.professorForm.reset();
   }
 }
