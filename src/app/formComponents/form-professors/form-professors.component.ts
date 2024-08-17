@@ -30,7 +30,7 @@ export class FormProfessorsComponent implements OnInit {
     });
     //Cheking for Paras is there any
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(id);
+
     if (id) {
       this.idProfessor = parseInt(id);
       let professor = this.professorsService

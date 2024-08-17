@@ -18,7 +18,6 @@ export class StudentsComponent implements OnInit {
 
   getAllStudents() {
     this.studentsServices.getAllStudents().subscribe((students: any) => {
-      console.log(students.data);
       this.students = students.data;
     });
   }

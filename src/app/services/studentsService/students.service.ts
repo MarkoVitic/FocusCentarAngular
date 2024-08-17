@@ -25,7 +25,7 @@ export class StudentsService {
     return this.http.post<Students>(this.apiUrl, student);
   }
   updateStudent(id: number, student: Students) {
-    return this.http.put<Students>(this.apiUrl + `$/{id}`, student);
+    return this.http.put<Students>(this.apiUrl + `/${id}`, student);
   }
   deleteStudent(id: number) {
     return this.http.delete(this.apiUrl + `/${id}`);
