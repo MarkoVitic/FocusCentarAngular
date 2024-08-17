@@ -1,1 +1,48 @@
-<p>subjets works!</p>
+<div class="p-3">
+  <h2 class="mb-2">Lista Svih Predmeta</h2>
+  <div class="d-flex justify-content-end mb-3 mx-5">
+    <button
+      [routerLink]="['/subjects/form']"
+      class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
+    >
+      Dodaj Novi Predmet<span class="fw-bold fs-4 px-2">+</span>
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Naziv Predmeta</th>
+        <th>Cijena Programa</th>
+
+        <th>Popust Programa</th>
+        <th>Ukupna Cijena Programa/th></th>
+        <th>idProfesor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of subjets">
+        <td>{{ subject.nazivPredmeta }}</td>
+        <td>{{ subject.cijenaPrograma }}</td>
+
+        <td>{{ subject.popustPrograma }}</td>
+        <td>{{ subject.ukupnaCijenaPrograma }}</td>
+
+        <td>
+          <button
+            class="btn btn-sm btn-danger mx-1"
+            (click)="deleteSubject(subject.idPredmet)"
+          >
+            Izbrisi
+          </button>
+          <button
+            class="btn btn-sm btn-secondary mx-1"
+            [routerLink]="['/subjects/form', subject.idPredmet]"
+          >
+            Izmijeni
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

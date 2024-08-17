@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'students/form', component: FormStudentsComponent },
   { path: 'students/form/:id', component: FormStudentsComponent },
 
-  { path: 'subjets', component: SubjetsComponent },
+  { path: 'subjects', component: SubjetsComponent },
   { path: 'subjects/form', component: FormSubjetsComponent },
   { path: 'subjects/form/:id', component: FormSubjetsComponent },
 ];

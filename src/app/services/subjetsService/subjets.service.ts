@@ -25,7 +25,7 @@ export class SubjetsService {
     return this.http.post<Subjets>(this.apiUrl, subject);
   }
   updateSubjet(id: number, subject: Subjets) {
-    return this.http.put<Subjets>(this.apiUrl + `$/{id}`, subject);
+    return this.http.put<Subjets>(this.apiUrl + `/${id}`, subject);
   }
   deleteSubjet(id: number) {
     return this.http.delete(this.apiUrl + `/${id}`);

@@ -1,1 +1,78 @@
-<p>form-subjets works!</p>
+<p class="mb-5 lead">Dodavanje Ucenika</p>
+<form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Naziv Predmeta</label>
+      <input class="form-control" type="text" formControlName="nazivPredmeta" />
+      <small
+        class="text-danger"
+        *ngIf="
+          subjectForm.get('nazivPredmeta')?.invalid &&
+          subjectForm.get('nazivPredmeta')?.touched
+        "
+      >
+        Unesite Naziv Predmeta
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Cijena Programa</label>
+      <input
+        class="form-control"
+        type="number"
+        formControlName="cijenaPrograma"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          subjectForm.get('cijenaPrograma')?.invalid &&
+          subjectForm.get('cijenaPrograma')?.touched
+        "
+      >
+        Unesite Cijenu Programa
+      </small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Popust Programa</label>
+      <input
+        class="form-control"
+        type="number"
+        formControlName="popustPrograma"
+      />
+      <small
+        class="text-danger"
+        *ngIf="
+          subjectForm.get('popustPrograma')?.invalid &&
+          subjectForm.get('popustPrograma')?.touched
+        "
+      >
+        Unesite Popust Programa
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">idProfesor</label>
+      <input class="form-control" type="number" formControlName="idProfesor" />
+      <small
+        class="text-danger"
+        *ngIf="
+          subjectForm.get('idProfesor')?.invalid &&
+          subjectForm.get('idProfesor')?.touched
+        "
+      >
+        idProfesor
+      </small>
+    </div>
+  </div>
+
+  <div class="col d-flex justify-content-center align-items-center mb-3">
+    <button
+      class="btn btn-primary w-25 fw-bold fs-5"
+      type="submit"
+      [disabled]="subjectForm.invalid"
+    >
+      Dodaj
+    </button>
+  </div>
+</form>
