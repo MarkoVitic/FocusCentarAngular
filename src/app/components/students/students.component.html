@@ -1,1 +1,56 @@
-<p>students works!</p>
+<div class="p-3">
+  <h2 class="mb-2">Lista Svih Ucenika</h2>
+  <div class="d-flex justify-content-end mb-3 mx-5">
+    <button
+      [routerLink]="['/students/form']"
+      class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
+    >
+      Dodaj Novog Ucenika <span class="fw-bold fs-4 px-2">+</span>
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ime i Prezime</th>
+        <th>Ime Roditelja</th>
+
+        <th>Kontakt Roditelja</th>
+        <th>Oci. 1</th>
+        <th>Oci. 2</th>
+        <th>Oci. 3</th>
+        <th>Oci. 4</th>
+        <th>Predmet</th>
+        <th>Ukupno Placeno do sada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.ImePrezimeUcenika }}</td>
+        <td>{{ student.ImeRoditelja }}</td>
+
+        <td>{{ student.kontaktRoditelja }}</td>
+        <td>{{ student.ocjenaJedan }}</td>
+        <td>{{ student.ocjenaDva }}</td>
+        <td>{{ student.ocjenaTri }}</td>
+        <td>{{ student.ocjenaCetiri }}</td>
+        <td>{{ student.idPredmet }}</td>
+        <td>{{ student.ukupnoPlacenoDoSada }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-danger mx-1"
+            (click)="deleteStudent(student.idUcenik)"
+          >
+            Izbrisi
+          </button>
+          <button
+            class="btn btn-sm btn-secondary mx-1"
+            [routerLink]="['/students/form', student.idUcenik]"
+          >
+            Izmijeni
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

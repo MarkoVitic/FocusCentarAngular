@@ -10,12 +10,10 @@ import { Router } from 'express';
 })
 export class ProfessorsComponent implements OnInit {
   professors: Professors[] = [];
-  professorOne: Professors = new Professors();
 
   constructor(private professorsService: ProfessorsService) {}
   ngOnInit(): void {
     this.getAllProfessors();
-    this.getOneProfessor(2);
   }
 
   getAllProfessors() {
@@ -24,9 +22,7 @@ export class ProfessorsComponent implements OnInit {
     });
   }
   getOneProfessor(id: number) {
-    this.professorsService
-      .getOneProfessor(id)
-      .subscribe((professor) => (this.professorOne = professor));
+    this.professorsService.getOneProfessor(id).subscribe();
   }
 
   deleteProfessor(id: number) {
