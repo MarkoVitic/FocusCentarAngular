@@ -7,4 +7,5 @@ export class Subjets {
   kreirano: Date;
   azurirano: Date;
   idProfesor: number;
+  imeProfesora: string;
 }

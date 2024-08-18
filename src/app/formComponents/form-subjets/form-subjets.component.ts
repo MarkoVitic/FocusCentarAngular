@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjetsService } from '../../services/subjetsService/subjets.service';
 import { Subjets } from '../../models/subjets';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  MaxValidator,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProfessorsService } from '../../services/professorService/professors.service';
+import { Professors } from '../../models/professors';
 
 @Component({
   selector: 'app-form-subjets',
@@ -12,19 +19,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FormSubjetsComponent implements OnInit {
   subjectForm: FormGroup = new FormGroup({});
   idSubject: number;
+  allProfessors: Professors[] = [];
 
   constructor(
     private subjectsService: SubjetsService,
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private professorsService: ProfessorsService
   ) {}
   ngOnInit(): void {
+    this.getAllProfessors();
     this.subjectForm = this.formBuilder.group({
       nazivPredmeta: ['', Validators.required],
       cijenaPrograma: ['', Validators.required],
       popustPrograma: ['', Validators.required],
-
+      ukupnaCijenaPrograma: [''],
       idProfesor: ['', Validators.required],
     });
     // Chekin for Params is there any
@@ -46,6 +56,7 @@ export class FormSubjetsComponent implements OnInit {
         this.subjectsService.createSubjets(this.subjectForm.value).subscribe();
         this.router.navigate(['/subjects']);
       } else {
+        console.log(this.subjectForm.value);
         this.subjectsService
           .updateSubjet(this.idSubject, this.subjectForm.value)
           .subscribe();
@@ -53,5 +64,11 @@ export class FormSubjetsComponent implements OnInit {
       }
       this.subjectForm.reset();
     }
+  }
+  getAllProfessors() {
+    this.professorsService.getAllProfessors().subscribe((professors: any) => {
+      console.log(professors);
+      this.allProfessors = professors;
+    });
   }
 }
