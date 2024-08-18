@@ -12,4 +12,5 @@ export class Students {
   kreirano: Date;
   azurirano: Date;
   idPredmet: number;
+  nazivPredmeta: string;
 }

@@ -128,7 +128,40 @@
   </div>
   <div class="row mb-3">
     <div class="col">
+      <label class="form-label">Ukupno placeno do sada</label>
+      <input
+        readonly
+        class="form-control"
+        type="number"
+        formControlName="ukupnoPlacenoDoSada"
+      />
+      <div
+        *ngIf="
+          studentForm.get('ukupnoPlacenoDoSada')?.invalid &&
+          studentForm.get('ukupnoPlacenoDoSada')?.touched
+        "
+      >
+        Ukpno placeno do sada
+      </div>
+    </div>
+    <div class="col">
       <label class="form-label">idPredmet</label>
+      <select class="form-control" formControlName="idPredmet">
+        <option *ngFor="let sub of allSubjects" [value]="sub.idPredmet">
+          {{ sub.nazivPredmeta }}
+        </option>
+      </select>
+      <small
+        class="text-danger"
+        *ngIf="
+          studentForm.get('idPredmet')?.invalid &&
+          studentForm.get('idPredmet')?.touched
+        "
+      >
+        Morate odabrati Predmet
+      </small>
+
+      <!-- <label class="form-label">idPredmet</label>
       <input class="form-control" type="number" formControlName="idPredmet" />
       <div
         *ngIf="
@@ -137,7 +170,7 @@
         "
       >
         idPredmet
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="col d-flex justify-content-center align-items-center mb-3">

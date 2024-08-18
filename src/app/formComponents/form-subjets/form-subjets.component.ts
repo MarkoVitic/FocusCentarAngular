@@ -67,7 +67,6 @@ export class FormSubjetsComponent implements OnInit {
   }
   getAllProfessors() {
     this.professorsService.getAllProfessors().subscribe((professors: any) => {
-      console.log(professors);
       this.allProfessors = professors;
     });
   }

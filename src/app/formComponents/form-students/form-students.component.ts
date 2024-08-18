@@ -4,6 +4,8 @@ import { Students } from '../../models/students';
 import { StudentsService } from '../../services/studentsService/students.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subjets } from '../../models/subjets';
+import { SubjetsService } from '../../services/subjetsService/subjets.service';
 @Component({
   selector: 'app-form-students',
   templateUrl: './form-students.component.html',
@@ -12,13 +14,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FormStudentsComponent implements OnInit {
   studentForm: FormGroup = new FormGroup({});
   idStudent: number;
+  allSubjects: Subjets[] = [];
   constructor(
     private studentsServices: StudentsService,
     private FormBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private subjetsService: SubjetsService
   ) {}
   ngOnInit(): void {
+    this.getAllSubjets();
     // Form Student
     this.studentForm = this.FormBuilder.group({
       ImePrezimeUcenika: ['', Validators.required],
@@ -30,6 +35,7 @@ export class FormStudentsComponent implements OnInit {
       ocjenaTri: [''],
       ocjenaCetiri: [''],
       idPredmet: [''],
+      ukupnoPlacenoDoSada: [''],
     });
 
     // Chekin for Params is there any
@@ -39,7 +45,6 @@ export class FormStudentsComponent implements OnInit {
       let student = this.studentsServices
         .getOneStudent(parseInt(id))
         .subscribe((student: any) => {
-          console.log(student);
           this.studentForm.patchValue(student.data[0]);
         });
     }
@@ -59,5 +64,11 @@ export class FormStudentsComponent implements OnInit {
       }
       this.studentForm.reset();
     }
+  }
+
+  getAllSubjets() {
+    this.subjetsService
+      .getAllSubjets()
+      .subscribe((sub) => (this.allSubjects = sub));
   }
 }

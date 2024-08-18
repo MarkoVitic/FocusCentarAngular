@@ -13,9 +13,8 @@
     <thead>
       <tr>
         <th>Ime i Prezime</th>
-        <th>Ime Roditelja</th>
+        <th>Predmet</th>
 
-        <th>Kontakt Roditelja</th>
         <th>Oci. 1</th>
         <th>Oci. 2</th>
         <th>Oci. 3</th>
@@ -27,9 +26,8 @@
     <tbody>
       <tr *ngFor="let student of students">
         <td>{{ student.ImePrezimeUcenika }}</td>
-        <td>{{ student.ImeRoditelja }}</td>
+        <td>{{ student.nazivPredmeta }}</td>
 
-        <td>{{ student.kontaktRoditelja }}</td>
         <td>{{ student.ocjenaJedan }}</td>
         <td>{{ student.ocjenaDva }}</td>
         <td>{{ student.ocjenaTri }}</td>

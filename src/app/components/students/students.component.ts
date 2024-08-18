@@ -13,13 +13,15 @@ export class StudentsComponent implements OnInit {
 
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
-    this.getAllStudents();
+    this.getAllStudentsWitihNameSubject();
   }
 
-  getAllStudents() {
-    this.studentsServices.getAllStudents().subscribe((students: any) => {
-      this.students = students.data;
-    });
+  getAllStudentsWitihNameSubject() {
+    this.studentsServices
+      .getAllStudentWithNameOfSubjet()
+      .subscribe((students: any) => {
+        this.students = students;
+      });
   }
   deleteStudent(id: number) {
     this.studentsServices.deleteStudent(id).subscribe();

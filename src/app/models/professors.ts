@@ -7,6 +7,7 @@ export class Professors {
   procenatProfesor: number;
   prihodMjesecniProfesor: number;
   prihodUkupni: number;
+  nazivPredmeta: string;
   kreirano: Date;
   azurirano: Date;
 }

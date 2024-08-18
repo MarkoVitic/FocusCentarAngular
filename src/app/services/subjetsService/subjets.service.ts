@@ -15,7 +15,7 @@ export class SubjetsService {
   constructor(private http: HttpClient) {}
 
   getAllSubjets(): Observable<Subjets[]> {
-    return this.http.get<Subjets[]>(this.apiUrl);
+    return this.http.get<Subjets[]>('http://127.0.0.1:3000/subjetsall');
   }
 
   getOneSubjet(id: number): Observable<Subjets> {

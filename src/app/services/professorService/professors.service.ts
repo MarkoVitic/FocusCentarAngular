@@ -15,7 +15,7 @@ export class ProfessorsService {
   constructor(private http: HttpClient) {}
 
   getAllProfessors(): Observable<Professors[]> {
-    return this.http.get<Professors[]>(this.apiUrl);
+    return this.http.get<Professors[]>('http://127.0.0.1:3000/professorsall');
   }
 
   getOneProfessor(id: number): Observable<Professors> {

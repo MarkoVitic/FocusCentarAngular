@@ -17,6 +17,9 @@ export class StudentsService {
   getAllStudents(): Observable<Students[]> {
     return this.http.get<Students[]>(this.apiUrl);
   }
+  getAllStudentWithNameOfSubjet() {
+    return this.http.get<Students[]>('http://127.0.0.1:3000/studentsall');
+  }
 
   getOneStudent(id: number): Observable<Students> {
     return this.http.get<Students>(this.apiUrl + `/${id}`);
