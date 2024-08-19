@@ -36,6 +36,7 @@ export class FormStudentsComponent implements OnInit {
       ocjenaCetiri: [''],
       idPredmet: [''],
       ukupnoPlacenoDoSada: [''],
+      popust: [''],
     });
 
     // Chekin for Params is there any

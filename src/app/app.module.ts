@@ -20,6 +20,8 @@ import { FormStudentsComponent } from './formComponents/form-students/form-stude
 import { FormSubjetsComponent } from './formComponents/form-subjets/form-subjets.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FormPaymentsComponent } from './formComponents/form-payments/form-payments.component';
+import { FormStudentPaymentComponent } from './formComponents/form-student-payment/form-student-payment.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { RouterModule } from '@angular/router';
     FormProfessorsComponent,
     FormStudentsComponent,
     FormSubjetsComponent,
+    FormPaymentsComponent,
+    FormStudentPaymentComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,4 +13,6 @@ export class Students {
   azurirano: Date;
   idPredmet: number;
   nazivPredmeta: string;
+  popust: number;
+  // ukupnaCijenaPrograma: number;
 }

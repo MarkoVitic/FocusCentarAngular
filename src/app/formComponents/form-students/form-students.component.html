@@ -173,6 +173,26 @@
       </div> -->
     </div>
   </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Dodatni Popust</label>
+      <input
+        readonly
+        class="form-control"
+        type="number"
+        formControlName="popust"
+      />
+      <div
+        *ngIf="
+          studentForm.get('popust')?.invalid &&
+          studentForm.get('popust')?.touched
+        "
+      >
+        Unesit Dodatni Popust
+      </div>
+    </div>
+    <div></div>
+  </div>
   <div class="col d-flex justify-content-center align-items-center mb-3">
     <button
       class="btn btn-primary w-25 fw-bold fs-5"
