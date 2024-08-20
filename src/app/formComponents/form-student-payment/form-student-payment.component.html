@@ -1,1 +1,50 @@
-<p>form-student-payment works!</p>
+<p class="mb-5 lead">Dodavanje Ucenika</p>
+<form [formGroup]="formStudenPayment" (ngSubmit)="onSubmit()">
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Iznos Uplate</label>
+      <input class="form-control" type="number" formControlName="iznosUplate" />
+      <small
+        class="text-danger"
+        *ngIf="
+          formStudenPayment.get('iznosUplate')?.invalid &&
+          formStudenPayment.get('iznosUplate')?.touched
+        "
+      >
+        Unesite Iznos Uplate
+      </small>
+    </div>
+    <div class="col">
+      <label class="form-label">Id Ucenika</label>
+      <input
+        class="form-control"
+        type="text"
+        formControlName="idUcenik"
+        readonly
+      />
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Id Predmet</label>
+      <input
+        readonly
+        class="form-control"
+        type="text"
+        formControlName="idPredmet"
+      />
+    </div>
+  </div>
+
+  <div class="col d-flex justify-content-center align-items-center mb-3">
+    <button
+      class="btn btn-primary w-25 fw-bold fs-5"
+      type="submit"
+      (click)="onSubmit()"
+      [disabled]="formStudenPayment.invalid"
+    >
+      Dodaj Uplatu
+    </button>
+  </div>
+</form>

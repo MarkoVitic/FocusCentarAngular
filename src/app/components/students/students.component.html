@@ -37,12 +37,14 @@
         <td>500</td>
         <td>{{ student.ukupnoPlacenoDoSada }}</td>
         <td>
-          <button
+          <a
             class="btn btn-sm btn-primary"
-            [routerLink]="['/students/formpayment']"
+            href="students/formpayment/{{ student.idUcenik }}/{{
+              student.idPredmet
+            }}"
+            >Placanja</a
           >
-            Placanje
-          </button>
+
           <button
             class="btn btn-sm btn-danger mx-1"
             (click)="deleteStudent(student.idUcenik)"

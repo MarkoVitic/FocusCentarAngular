@@ -18,7 +18,10 @@ const routes: Routes = [
   { path: 'students', component: StudentsComponent },
   { path: 'students/form', component: FormStudentsComponent },
   { path: 'students/form/:id', component: FormStudentsComponent },
-  { path: 'students/formpayment', component: FormStudentPaymentComponent },
+  {
+    path: 'students/formpayment/:idUcenik/:idPredmet',
+    component: FormStudentPaymentComponent,
+  },
 
   { path: 'subjects', component: SubjetsComponent },
   { path: 'subjects/form', component: FormSubjetsComponent },

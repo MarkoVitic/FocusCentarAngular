@@ -1,1 +1,45 @@
-<p>payments works!</p>
+<div class="p-3">
+  <h2 class="mb-2">Lista Svih Placanja</h2>
+  <div class="d-flex justify-content-end mb-3 mx-5">
+    <button
+      [routerLink]="['/students/form']"
+      class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
+    >
+      Dodaj Novog Ucenika <span class="fw-bold fs-4 px-2">+</span>
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Ime i Prezime</th>
+        <th>Predmet</th>
+
+        <th>iznosUplate</th>
+        <th>Datum Uplate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of allPayments">
+        <td>{{ payment.ImePrezimeUcenika }}</td>
+        <td>{{ payment.nazivPredmeta }}</td>
+
+        <td>{{ payment.iznosUplate }}</td>
+        <td>{{ payment.kreirano | date : "dd/MM/yyyy" }}</td>
+
+        <td>
+          <!-- <a
+              class="btn btn-sm btn-primary"
+              href="students/formpayment/{{ student.idUcenik }}/{{
+                student.idPredmet
+              }}"
+              >Placanja</a
+            > -->
+
+          <button class="btn btn-sm btn-danger mx-1">Izbrisi</button>
+          <button class="btn btn-sm btn-secondary mx-1">Izmijeni</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
