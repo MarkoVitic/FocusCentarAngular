@@ -54,6 +54,7 @@ export class FormStudentsComponent implements OnInit {
   onSubmit() {
     if (this.studentForm.valid) {
       if (!this.idStudent) {
+        console.log(this.studentForm.value);
         this.studentsServices.createStudent(this.studentForm.value).subscribe();
         this.router.navigate(['/students']);
       } else {

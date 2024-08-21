@@ -160,27 +160,16 @@
       >
         Morate odabrati Predmet
       </small>
-
-      <!-- <label class="form-label">idPredmet</label>
-      <input class="form-control" type="number" formControlName="idPredmet" />
-      <div
-        *ngIf="
-          studentForm.get('idPredmet')?.invalid &&
-          studentForm.get('idPredmet')?.touched
-        "
-      >
-        idPredmet
-      </div> -->
     </div>
   </div>
   <div class="row mb-3">
     <div class="col">
       <label class="form-label">Dodatni Popust</label>
       <input
-        readonly
         class="form-control"
         type="number"
         formControlName="popust"
+        [defaultValue]="0"
       />
       <div
         *ngIf="

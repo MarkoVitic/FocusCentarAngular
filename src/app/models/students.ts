@@ -14,5 +14,6 @@ export class Students {
   idPredmet: number;
   nazivPredmeta: string;
   popust: number;
+
   // ukupnaCijenaPrograma: number;
 }
