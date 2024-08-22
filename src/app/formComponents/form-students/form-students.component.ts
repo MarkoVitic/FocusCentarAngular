@@ -59,6 +59,7 @@ export class FormStudentsComponent implements OnInit {
         this.router.navigate(['/students']);
       } else {
         console.log(this.idStudent);
+        console.log(this.studentForm.value);
         this.studentsServices
           .updateStudent(this.idStudent, this.studentForm.value)
           .subscribe();

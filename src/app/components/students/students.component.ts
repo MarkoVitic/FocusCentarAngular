@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Students } from '../../models/students';
 import { StudentsService } from '../../services/studentsService/students.service';
+
 import { Route } from '@angular/router';
 
 @Component({
@@ -14,6 +15,7 @@ export class StudentsComponent implements OnInit {
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
     this.getAllStudentsWitihNameSubject();
+    this.getFinalPrice();
   }
 
   getAllStudentsWitihNameSubject() {
@@ -25,5 +27,15 @@ export class StudentsComponent implements OnInit {
   }
   deleteStudent(id: number) {
     this.studentsServices.deleteStudent(id).subscribe();
+  }
+
+  getFinalPrice() {
+    this.students = this.students.map((student: Students) => {
+      if (student.popust && student.ukupnaCijenaPrograma) {
+        student.ukupnaCijenaPrograma -=
+          (student.ukupnaCijenaPrograma * student.popust) / 100;
+      }
+      return student;
+    });
   }
 }
