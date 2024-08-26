@@ -1,105 +1,107 @@
-<p class="mb-5 lead">Dodavanje Profesora</p>
+<div class="container">
+  <h2 class="mb-5">Dodavanje Profesora</h2>
 
-<form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Ime i Prezime Profesora</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="ImePrezimeProfesor"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          professorForm.get('ImePrezimeProfesor')?.invalid &&
-          professorForm.get('ImePrezimeProfesor')?.touched
-        "
-      >
-        Unesite Ime i Prezime
-      </small>
-    </div>
-    <div class="col">
-      <label class="form-label">Kontakt Profesora</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="kontaktProfesor"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          professorForm.get('kontaktProfesor')?.invalid &&
-          professorForm.get('kontaktProfesor')?.touched
-        "
-      >
-        Unesite Kontakt Telefon
-      </small>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Email Profesora</label>
-      <input
-        class="form-control"
-        type="email"
-        formControlName="emailProfesor"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          professorForm.get('emailProfesor')?.invalid &&
-          professorForm.get('emailProfesor')?.touched
-        "
-      >
-        Unesite Validan email
-      </small>
-    </div>
-    <div class="col">
-      <label class="form-label">Adresa Profesora</label>
-      <input
-        class="form-control"
-        type="text"
-        formControlName="adresaProfesor"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          professorForm.get('adresaProfesor')?.invalid &&
-          professorForm.get('adresaProfesor')?.touched
-        "
-      >
-        Unesite Validanu Adresu
-      </small>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Procenat Profesora</label>
-      <input
-        class="form-control"
-        type="number"
-        formControlName="procenatProfesor"
-      />
-      <div
-        *ngIf="
-          professorForm.get('procenatProfesor')?.invalid &&
-          professorForm.get('procenatProfesor')?.touched
-        "
-      >
-        Unesite Procenat Profesora
+  <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Ime i Prezime Profesora</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="ImePrezimeProfesor"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            professorForm.get('ImePrezimeProfesor')?.invalid &&
+            professorForm.get('ImePrezimeProfesor')?.touched
+          "
+        >
+          Unesite Ime i Prezime
+        </small>
+      </div>
+      <div class="col">
+        <label class="form-label">Kontakt Profesora</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="kontaktProfesor"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            professorForm.get('kontaktProfesor')?.invalid &&
+            professorForm.get('kontaktProfesor')?.touched
+          "
+        >
+          Unesite Kontakt Telefon
+        </small>
       </div>
     </div>
-  </div>
-  <div class="col d-flex justify-content-center align-items-center mb-3">
-    <button
-      class="btn btn-primary w-25 fw-bold fs-5"
-      type="submit"
-      [disabled]="professorForm.invalid"
-    >
-      Dodaj
-    </button>
-  </div>
-</form>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Email Profesora</label>
+        <input
+          class="form-control"
+          type="email"
+          formControlName="emailProfesor"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            professorForm.get('emailProfesor')?.invalid &&
+            professorForm.get('emailProfesor')?.touched
+          "
+        >
+          Unesite Validan email
+        </small>
+      </div>
+      <div class="col">
+        <label class="form-label">Adresa Profesora</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="adresaProfesor"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            professorForm.get('adresaProfesor')?.invalid &&
+            professorForm.get('adresaProfesor')?.touched
+          "
+        >
+          Unesite Validanu Adresu
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Procenat Profesora</label>
+        <input
+          class="form-control"
+          type="number"
+          formControlName="procenatProfesor"
+        />
+        <div
+          *ngIf="
+            professorForm.get('procenatProfesor')?.invalid &&
+            professorForm.get('procenatProfesor')?.touched
+          "
+        >
+          Unesite Procenat Profesora
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex justify-content-center align-items-center mb-3">
+      <button
+        class="btn btn-primary w-25 fw-bold fs-5"
+        type="submit"
+        [disabled]="professorForm.invalid"
+      >
+        Dodaj
+      </button>
+    </div>
+  </form>
+</div>

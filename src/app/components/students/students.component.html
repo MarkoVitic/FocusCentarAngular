@@ -1,12 +1,25 @@
 <div class="p-3">
-  <h2 class="mb-2">Lista Svih Ucenika</h2>
-  <div class="d-flex justify-content-end mb-3 mx-5">
-    <button
-      [routerLink]="['/students/form']"
-      class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
-    >
-      Dodaj Novog Ucenika <span class="fw-bold fs-4 px-2">+</span>
-    </button>
+  <h2 class="mb-5">Lista Svih Ucenika</h2>
+
+  <div class="d-flex justify-content-between mb-3">
+    <div>
+      <button
+        [routerLink]="['/students/form']"
+        class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
+      >
+        Dodaj Novog Ucenika <span class="fw-bold fs-4 px-2">+</span>
+      </button>
+    </div>
+
+    <div>
+      <input
+        class="w-100 p-4 mr-4 form-control"
+        style="height: 50px"
+        type="text"
+        placeholder="Pretraga"
+        (keyup)="applyFilter($event)"
+      />
+    </div>
   </div>
 
   <table class="table table-striped">
@@ -25,7 +38,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let student of displayList(currentPage)">
         <td>{{ student.ImePrezimeUcenika }}</td>
         <td>{{ student.nazivPredmeta }}</td>
 
@@ -61,4 +74,14 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <button
+      class="btn btn-outline-primary mx-1"
+      *ngFor="let page of setPagination()"
+      (click)="onPageChange(page)"
+      [class.active]="currentPage === page"
+    >
+      {{ page }}
+    </button>
+  </div>
 </div>

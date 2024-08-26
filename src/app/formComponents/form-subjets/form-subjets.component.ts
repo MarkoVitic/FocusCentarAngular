@@ -33,9 +33,10 @@ export class FormSubjetsComponent implements OnInit {
     this.subjectForm = this.formBuilder.group({
       nazivPredmeta: ['', Validators.required],
       cijenaPrograma: ['', Validators.required],
-      popustPrograma: ['', Validators.required],
+      popustPrograma: [''],
       ukupnaCijenaPrograma: [''],
       idProfesor: ['', Validators.required],
+      idPredmet: this.idSubject,
     });
     // Chekin for Params is there any
     let id = this.activeRoute.snapshot.paramMap.get('id');
@@ -67,7 +68,9 @@ export class FormSubjetsComponent implements OnInit {
   }
   getAllProfessors() {
     this.professorsService.getAllProfessors().subscribe((professors: any) => {
-      this.allProfessors = professors;
+      professors.map((pro: any) =>
+        !pro.idPredmet ? this.allProfessors.push(pro) : console.log('nema')
+      );
     });
   }
 }

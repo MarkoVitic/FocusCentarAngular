@@ -22,6 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FormPaymentsComponent } from './formComponents/form-payments/form-payments.component';
 import { FormStudentPaymentComponent } from './formComponents/form-student-payment/form-student-payment.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,13 @@ import { FormStudentPaymentComponent } from './formComponents/form-student-payme
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatSelectModule,
   ],
-  providers: [provideClientHydration(), provideHttpClient(withFetch())],
+  providers: [
+    provideClientHydration(),
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

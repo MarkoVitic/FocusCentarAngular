@@ -1,93 +1,88 @@
-<p class="mb-5 lead">Dodavanje Predmeta</p>
-<form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Naziv Predmeta</label>
-      <input class="form-control" type="text" formControlName="nazivPredmeta" />
-      <small
-        class="text-danger"
-        *ngIf="
-          subjectForm.get('nazivPredmeta')?.invalid &&
-          subjectForm.get('nazivPredmeta')?.touched
-        "
-      >
-        Unesite Naziv Predmeta
-      </small>
+<div class="container">
+  <h2 class="mb-5">Dodavanje Predmeta</h2>
+  <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Naziv Predmeta</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="nazivPredmeta"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            subjectForm.get('nazivPredmeta')?.invalid &&
+            subjectForm.get('nazivPredmeta')?.touched
+          "
+        >
+          Unesite Naziv Predmeta
+        </small>
+      </div>
+      <div class="col">
+        <label class="form-label">Cijena Programa</label>
+        <input
+          class="form-control"
+          type="number"
+          formControlName="cijenaPrograma"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            subjectForm.get('cijenaPrograma')?.invalid &&
+            subjectForm.get('cijenaPrograma')?.touched
+          "
+        >
+          Unesite Cijenu Programa
+        </small>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">Cijena Programa</label>
-      <input
-        class="form-control"
-        type="number"
-        formControlName="cijenaPrograma"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          subjectForm.get('cijenaPrograma')?.invalid &&
-          subjectForm.get('cijenaPrograma')?.touched
-        "
-      >
-        Unesite Cijenu Programa
-      </small>
-    </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Popust Programa</label>
-      <input
-        class="form-control"
-        type="number"
-        formControlName="popustPrograma"
-      />
-      <small
-        class="text-danger"
-        *ngIf="
-          subjectForm.get('popustPrograma')?.invalid &&
-          subjectForm.get('popustPrograma')?.touched
-        "
-      >
-        Unesite Popust Programa. Popust ne moze biti beci od 50%
-      </small>
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Popust Programa</label>
+        <input
+          class="form-control"
+          type="number"
+          formControlName="popustPrograma"
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            subjectForm.get('popustPrograma')?.invalid &&
+            subjectForm.get('popustPrograma')?.touched
+          "
+        >
+          Unesite Popust Programa. Popust ne moze biti beci od 50%
+        </small>
+      </div>
+      <div class="col">
+        <label class="form-label">Profesor</label>
+        <select class="form-control" formControlName="idProfesor">
+          <option *ngFor="let prof of allProfessors" [value]="prof.idProfesor">
+            {{ prof.ImePrezimeProfesor }}
+          </option>
+        </select>
+        <small
+          class="text-danger"
+          *ngIf="
+            subjectForm.get('idProfesor')?.invalid &&
+            subjectForm.get('idProfesor')?.touched
+          "
+        >
+          Izaberite Predavaca Predmeta
+        </small>
+      </div>
     </div>
-    <div class="col">
-      <label class="form-label">idProfesor</label>
-      <select class="form-control" formControlName="idProfesor">
-        <option *ngFor="let prof of allProfessors" [value]="prof.idProfesor">
-          {{ prof.ImePrezimeProfesor }}
-        </option>
-      </select>
-      <small
-        class="text-danger"
-        *ngIf="
-          subjectForm.get('idProfesor')?.invalid &&
-          subjectForm.get('idProfesor')?.touched
-        "
-      >
-        idProfesor
-      </small>
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col">
-      <label class="form-label">Ukupna Cijena Programa</label>
-      <input
-        readonly
-        class="form-control"
-        type="number"
-        formControlName="ukupnaCijenaPrograma"
-      />
-    </div>
-  </div>
 
-  <div class="col d-flex justify-content-center align-items-center mb-3">
-    <button
-      class="btn btn-primary w-25 fw-bold fs-5"
-      type="submit"
-      [disabled]="subjectForm.invalid"
-    >
-      Dodaj
-    </button>
-  </div>
-</form>
+    <div class="col d-flex justify-content-center align-items-center mb-3">
+      <button
+        class="btn btn-primary w-25 fw-bold fs-5"
+        type="submit"
+        [disabled]="subjectForm.invalid"
+      >
+        Dodaj
+      </button>
+    </div>
+  </form>
+</div>

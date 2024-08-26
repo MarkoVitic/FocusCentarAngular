@@ -11,6 +11,10 @@ import { Route } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
   students: Students[] = [];
+  filterStudents: Students[] = [];
+
+  currentPage: number = 1;
+  rows: number = 10;
 
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
@@ -23,6 +27,7 @@ export class StudentsComponent implements OnInit {
       .getAllStudentWithNameOfSubjet()
       .subscribe((students: any) => {
         this.students = students;
+        this.filterStudents = students;
       });
   }
   deleteStudent(id: number) {
@@ -36,6 +41,31 @@ export class StudentsComponent implements OnInit {
           (student.ukupnaCijenaPrograma * student.popust) / 100;
       }
       return student;
+    });
+  }
+
+  displayList(page: number) {
+    const strat = this.rows * (page - 1);
+    const end = strat + this.rows;
+    return this.filterStudents.slice(strat, end);
+  }
+
+  setPagination() {
+    const pageCount = Math.ceil(this.filterStudents.length / this.rows);
+    return Array.from({ length: pageCount }, (_, i) => i + 1);
+  }
+  onPageChange(page: number) {
+    this.currentPage = page;
+  }
+  applyFilter(event: Event): void {
+    let searchTherm = (event.target as HTMLInputElement).value;
+    searchTherm = searchTherm.toLowerCase();
+
+    this.filterStudents = this.students.filter((student) => {
+      return (
+        student.ImePrezimeUcenika.toLowerCase().includes(searchTherm) ||
+        student.nazivPredmeta.toLowerCase().includes(searchTherm)
+      );
     });
   }
 }

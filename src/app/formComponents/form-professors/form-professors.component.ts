@@ -24,7 +24,7 @@ export class FormProfessorsComponent implements OnInit {
     this.professorForm = this.formBuilder.group({
       ImePrezimeProfesor: ['', Validators.required],
       kontaktProfesor: ['', Validators.required],
-      emailProfesor: ['', [Validators.required, Validators.email]],
+      emailProfesor: ['', [Validators.email]],
       adresaProfesor: [''],
       procenatProfesor: ['', Validators.required],
     });
