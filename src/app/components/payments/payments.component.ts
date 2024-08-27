@@ -11,6 +11,8 @@ export class PaymentsComponent implements OnInit {
   allPayments: PaymentDetails[] = [];
   filterPayments: PaymentDetails[] = [];
   sortOrder: string;
+  searchText: string;
+  statusFilter: boolean = false;
 
   currentPage: number = 1;
   rows: number = 10;
@@ -24,6 +26,12 @@ export class PaymentsComponent implements OnInit {
     this.paymentService.getAllPayments().subscribe((payment: any) => {
       this.allPayments = payment.data;
       this.filterPayments = payment.data;
+    });
+  }
+
+  deltePaymnet(id: number) {
+    this.paymentService.deletePayment(id).subscribe(() => {
+      window.location.reload();
     });
   }
 
@@ -41,16 +49,16 @@ export class PaymentsComponent implements OnInit {
     this.currentPage = page;
   }
 
-  applyFilter(event: Event): void {
-    let searchTherm = (event.target as HTMLInputElement).value;
-    searchTherm = searchTherm.toLowerCase();
+  applyFilter(searchText: string): void {
+    searchText = searchText.toLowerCase();
 
     this.filterPayments = this.allPayments.filter((payment) => {
       return (
-        payment.ImePrezimeUcenika.toLowerCase().includes(searchTherm) ||
-        payment.nazivPredmeta.toLowerCase().includes(searchTherm)
+        payment.ImePrezimeUcenika.toLowerCase().includes(searchText) ||
+        payment.nazivPredmeta.toLowerCase().includes(searchText)
       );
     });
+    this.statusFilter = true;
     this.sortByDate(this.sortOrder);
   }
 
@@ -71,7 +79,12 @@ export class PaymentsComponent implements OnInit {
           new Date(a.kreirano).getTime() - new Date(b.kreirano).getTime()
       );
     }
+    this.statusFilter = true;
+  }
 
-    console.log(this.filterPayments);
+  resetFilter() {
+    this.searchText = '';
+    this.applyFilter('');
+    this.statusFilter = false;
   }
 }

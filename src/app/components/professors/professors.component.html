@@ -1,23 +1,33 @@
 <div class="p-3">
-  <h2 class="mb-5">Lista Svih Profesora</h2>
+  <h2 class="mb-5">Lista profesora</h2>
   <div class="d-flex justify-content-between mb-3">
     <div>
       <button
         [routerLink]="['/professors/form']"
         class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
       >
-        Dodaj Novog Profesora <span class="fw-bold fs-4 px-2">+</span>
+        Dodaj profesora <i class="bi bi-plus-lg mx-2"></i>
       </button>
     </div>
 
-    <div>
+    <div class="d-flex flex-row">
       <input
-        class="w-100 p-4 mr-4 form-control"
-        style="height: 50px"
+        class="p-4 mr-4 form-control"
+        style="height: 50px; width: 450px"
         type="text"
-        placeholder="Pretraga"
-        (keyup)="applyFilter($event)"
+        placeholder="Pretraga po imenu prezimenu"
+        [(ngModel)]="searchText"
       />
+      <button class="btn btn btn-info mx-3" (click)="applyFilter(searchText)">
+        Pretraži
+      </button>
+      <button
+        *ngIf="statusFilter"
+        class="btn btn-warning"
+        (click)="resetFilter()"
+      >
+        <i class="bi bi-x-circle-fill mx-2"></i>Poništi pretragu
+      </button>
     </div>
   </div>
 
@@ -28,8 +38,8 @@
         <th>Predmeti</th>
 
         <th>Procenat</th>
-        <th>Prihod Mjesecni</th>
-        <th>Prihod Ukupni</th>
+        <th>Mjesečni prihod</th>
+        <th>Ukupni prihod</th>
 
         <th>Kontakt</th>
         <th>Opcije</th>
@@ -55,12 +65,14 @@
             class="btn btn-sm btn-danger mx-1"
             (click)="deleteProfessor(professor.idProfesor)"
           >
+            <i class="bi bi-trash mx-1"></i>
             Izbrisi
           </button>
           <button
             class="btn btn-sm btn-secondary mx-1"
             [routerLink]="['/professors/form/', professor.idProfesor]"
           >
+            <i class="bi bi-pencil mx-1"></i>
             Izmijeni
           </button>
         </td>

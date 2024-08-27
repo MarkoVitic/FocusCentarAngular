@@ -68,8 +68,9 @@ export class FormStudentPaymentComponent implements OnInit {
       idProfesor: parseInt(this.formStudenPayment.value.idProfesor),
     };
 
-    this.paymentService.createPayment(payment).subscribe();
-    // ***Napomena VAZNO*** aKO SE OVO NE UPISIVACE 2x ISTU UPLATU. vJEROVATNO ZBOG AHREF STO SAM STAVIOU STUDENTCOMPONENET
-    this.router.navigate(['/payments']);
+    this.paymentService.createPayment(payment).subscribe(() => {
+      this.router.navigateByUrl('/payments'); // Only navigate after professor is created
+      this.formStudenPayment.reset(); // Reset form after successful creation
+    });
   }
 }

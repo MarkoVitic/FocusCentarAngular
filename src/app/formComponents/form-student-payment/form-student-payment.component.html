@@ -3,7 +3,7 @@
   <form [formGroup]="formStudenPayment" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Iznos Uplate</label>
+        <label class="form-label">Iznos uplate</label>
         <input
           class="form-control"
           type="number"
@@ -16,11 +16,11 @@
             formStudenPayment.get('iznosUplate')?.touched
           "
         >
-          Unesite Iznos Uplate
+          Unesite iznos uplate
         </small>
       </div>
       <div class="col">
-        <label class="form-label">Id Ucenika</label>
+        <label class="form-label">Učenik</label>
         <input
           class="form-control"
           type="text"
@@ -32,7 +32,7 @@
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Id Predmet</label>
+        <label class="form-label">Predmet</label>
         <input
           readonly
           class="form-control"
@@ -46,10 +46,9 @@
       <button
         class="btn btn-primary w-25 fw-bold fs-5"
         type="submit"
-        (click)="onSubmit()"
         [disabled]="formStudenPayment.invalid"
       >
-        Dodaj Uplatu
+        Dodaj uplatu
       </button>
     </div>
   </form>

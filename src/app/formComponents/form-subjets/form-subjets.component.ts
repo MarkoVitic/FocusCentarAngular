@@ -33,7 +33,7 @@ export class FormSubjetsComponent implements OnInit {
     this.subjectForm = this.formBuilder.group({
       nazivPredmeta: ['', Validators.required],
       cijenaPrograma: ['', Validators.required],
-      popustPrograma: [''],
+      popustPrograma: [0],
       ukupnaCijenaPrograma: [''],
       idProfesor: ['', Validators.required],
       idPredmet: this.idSubject,
@@ -54,23 +54,26 @@ export class FormSubjetsComponent implements OnInit {
   onSubmit() {
     if (this.subjectForm.valid) {
       if (!this.idSubject) {
-        this.subjectsService.createSubjets(this.subjectForm.value).subscribe();
-        this.router.navigate(['/subjects']);
+        this.subjectsService
+          .createSubjets(this.subjectForm.value)
+          .subscribe(() => {
+            this.router.navigateByUrl('/subjects'); // Only navigate after professor is created
+            this.subjectForm.reset(); // Reset form after successful creation
+          });
       } else {
         console.log(this.subjectForm.value);
         this.subjectsService
           .updateSubjet(this.idSubject, this.subjectForm.value)
-          .subscribe();
-        this.router.navigate(['/subjects']);
+          .subscribe(() => {
+            this.router.navigateByUrl('/subjects'); // Only navigate after professor is created
+            this.subjectForm.reset(); // Reset form after successful creation
+          });
       }
-      this.subjectForm.reset();
     }
   }
   getAllProfessors() {
     this.professorsService.getAllProfessors().subscribe((professors: any) => {
-      professors.map((pro: any) =>
-        !pro.idPredmet ? this.allProfessors.push(pro) : console.log('nema')
-      );
+      this.allProfessors = professors;
     });
   }
 }

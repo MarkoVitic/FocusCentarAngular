@@ -1,10 +1,10 @@
 <div class="container">
-  <h2 class="mb-5">Dodavanje Profesora</h2>
+  <h2 class="mb-5">Dodavanje profesora</h2>
 
   <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Ime i Prezime Profesora</label>
+        <label class="form-label">Ime i prezime </label>
         <input
           class="form-control"
           type="text"
@@ -17,11 +17,11 @@
             professorForm.get('ImePrezimeProfesor')?.touched
           "
         >
-          Unesite Ime i Prezime
+          Unesite ime i prezime
         </small>
       </div>
       <div class="col">
-        <label class="form-label">Kontakt Profesora</label>
+        <label class="form-label">Kontakt</label>
         <input
           class="form-control"
           type="text"
@@ -34,14 +34,14 @@
             professorForm.get('kontaktProfesor')?.touched
           "
         >
-          Unesite Kontakt Telefon
+          Unesite kontakt telefon
         </small>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Email Profesora</label>
+        <label class="form-label">Email </label>
         <input
           class="form-control"
           type="email"
@@ -54,11 +54,11 @@
             professorForm.get('emailProfesor')?.touched
           "
         >
-          Unesite Validan email
+          Unesite validan email
         </small>
       </div>
       <div class="col">
-        <label class="form-label">Adresa Profesora</label>
+        <label class="form-label">Adresa</label>
         <input
           class="form-control"
           type="text"
@@ -71,26 +71,27 @@
             professorForm.get('adresaProfesor')?.touched
           "
         >
-          Unesite Validanu Adresu
+          Unesite validanu adresu
         </small>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Procenat Profesora</label>
+        <label class="form-label">Procenat</label>
         <input
           class="form-control"
           type="number"
           formControlName="procenatProfesor"
         />
         <div
+          class="text-danger"
           *ngIf="
             professorForm.get('procenatProfesor')?.invalid &&
             professorForm.get('procenatProfesor')?.touched
           "
         >
-          Unesite Procenat Profesora
+          Unesite procenat profesora
         </div>
       </div>
     </div>

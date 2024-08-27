@@ -12,6 +12,8 @@ import { Route } from '@angular/router';
 export class StudentsComponent implements OnInit {
   students: Students[] = [];
   filterStudents: Students[] = [];
+  searchText: string;
+  statusFilter: boolean = false;
 
   currentPage: number = 1;
   rows: number = 10;
@@ -31,7 +33,9 @@ export class StudentsComponent implements OnInit {
       });
   }
   deleteStudent(id: number) {
-    this.studentsServices.deleteStudent(id).subscribe();
+    this.studentsServices.deleteStudent(id).subscribe(() => {
+      window.location.reload();
+    });
   }
 
   getFinalPrice() {
@@ -57,15 +61,20 @@ export class StudentsComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
   }
-  applyFilter(event: Event): void {
-    let searchTherm = (event.target as HTMLInputElement).value;
-    searchTherm = searchTherm.toLowerCase();
+  applyFilter(searchText: string): void {
+    searchText = searchText.toLowerCase();
 
     this.filterStudents = this.students.filter((student) => {
       return (
-        student.ImePrezimeUcenika.toLowerCase().includes(searchTherm) ||
-        student.nazivPredmeta.toLowerCase().includes(searchTherm)
+        student.ImePrezimeUcenika.toLowerCase().includes(searchText) ||
+        student.nazivPredmeta.toLowerCase().includes(searchText)
       );
     });
+    this.statusFilter = true;
+  }
+  resetFilter() {
+    this.searchText = '';
+    this.applyFilter('');
+    this.statusFilter = false;
   }
 }

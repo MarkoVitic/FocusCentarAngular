@@ -3,7 +3,7 @@
   <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Naziv Predmeta</label>
+        <label class="form-label">Naziv predmeta</label>
         <input
           class="form-control"
           type="text"
@@ -20,7 +20,7 @@
         </small>
       </div>
       <div class="col">
-        <label class="form-label">Cijena Programa</label>
+        <label class="form-label">Cijena programa</label>
         <input
           class="form-control"
           type="number"
@@ -33,14 +33,14 @@
             subjectForm.get('cijenaPrograma')?.touched
           "
         >
-          Unesite Cijenu Programa
+          Unesite cijenu programa
         </small>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
-        <label class="form-label">Popust Programa</label>
+        <label class="form-label">Popust programa</label>
         <input
           class="form-control"
           type="number"

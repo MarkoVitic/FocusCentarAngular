@@ -44,19 +44,21 @@ export class FormProfessorsComponent implements OnInit {
 
   onSubmit() {
     if (this.professorForm.valid) {
+      const professorData = this.professorForm.value;
+
       if (!this.idProfessor) {
-        this.professorsService
-          .createProfessor(this.professorForm.value)
-          .subscribe();
-        this.router.navigate(['/professors']);
+        this.professorsService.createProfessor(professorData).subscribe(() => {
+          this.router.navigateByUrl('/professors'); // Only navigate after professor is created
+          this.professorForm.reset(); // Reset form after successful creation
+        });
       } else {
-        console.log(this.professorForm.value);
         this.professorsService
-          .updateProfessor(this.idProfessor, this.professorForm.value)
-          .subscribe();
-        this.router.navigate(['/professors']);
+          .updateProfessor(this.idProfessor, professorData)
+          .subscribe(() => {
+            this.router.navigateByUrl('/professors'); // Only navigate after professor is updated
+            this.professorForm.reset(); // Reset form after successful update
+          });
       }
     }
-    this.professorForm.reset();
   }
 }

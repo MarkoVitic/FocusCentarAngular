@@ -11,6 +11,8 @@ import { SubjetsService } from '../../services/subjetsService/subjets.service';
 export class SubjetsComponent implements OnInit {
   subjets: Subjets[] = [];
   filterSubjets: Subjets[] = [];
+  searchText: string;
+  statusFilter: boolean = false;
 
   currentPage: number = 1;
   rows: number = 10;
@@ -27,7 +29,9 @@ export class SubjetsComponent implements OnInit {
     });
   }
   deleteSubject(id: number) {
-    this.subjetService.deleteSubjet(id).subscribe();
+    this.subjetService.deleteSubjet(id).subscribe(() => {
+      window.location.reload();
+    });
   }
   displayList(page: number) {
     const strat = this.rows * (page - 1);
@@ -42,15 +46,21 @@ export class SubjetsComponent implements OnInit {
   onPageChange(page: number) {
     this.currentPage = page;
   }
-  applyFilter(event: Event): void {
-    let searchTherm = (event.target as HTMLInputElement).value;
-    searchTherm = searchTherm.toLowerCase();
+  applyFilter(searchText: string): void {
+    searchText = searchText.toLowerCase();
 
     this.filterSubjets = this.subjets.filter((subjets) => {
       return (
-        subjets.ImePrezimeProfesor.toLowerCase().includes(searchTherm) ||
-        subjets.nazivPredmeta.toLowerCase().includes(searchTherm)
+        subjets.ImePrezimeProfesor.toLowerCase().includes(searchText) ||
+        subjets.nazivPredmeta.toLowerCase().includes(searchText)
       );
     });
+    this.statusFilter = true;
+  }
+
+  resetFilter() {
+    this.searchText = '';
+    this.applyFilter('');
+    this.statusFilter = false;
   }
 }

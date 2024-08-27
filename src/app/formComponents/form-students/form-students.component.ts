@@ -55,17 +55,22 @@ export class FormStudentsComponent implements OnInit {
     if (this.studentForm.valid) {
       if (!this.idStudent) {
         console.log(this.studentForm.value);
-        this.studentsServices.createStudent(this.studentForm.value).subscribe();
-        this.router.navigate(['/students']);
+        this.studentsServices
+          .createStudent(this.studentForm.value)
+          .subscribe(() => {
+            this.router.navigateByUrl('/students'); // Only navigate after professor is created
+            this.studentForm.reset(); // Reset form after successful creation
+          });
       } else {
         console.log(this.idStudent);
         console.log(this.studentForm.value);
         this.studentsServices
           .updateStudent(this.idStudent, this.studentForm.value)
-          .subscribe();
-        this.router.navigate(['/students']);
+          .subscribe(() => {
+            this.router.navigateByUrl('/students'); // Only navigate after professor is created
+            this.studentForm.reset(); // Reset form after successful creation
+          });
       }
-      this.studentForm.reset();
     }
   }
 

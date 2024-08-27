@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Professors } from '../../models/professors';
 import { ProfessorsService } from '../../services/professorService/professors.service';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-professors',
@@ -11,11 +11,16 @@ import { Router } from 'express';
 export class ProfessorsComponent implements OnInit {
   professors: Professors[] = [];
   filterProfessor: Professors[] = [];
+  searchText: string;
+  statusFilter: boolean = false;
 
   currentPage: number = 1;
   rows: number = 10;
 
-  constructor(private professorsService: ProfessorsService) {}
+  constructor(
+    private professorsService: ProfessorsService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.getAllProfessors();
   }
@@ -23,7 +28,6 @@ export class ProfessorsComponent implements OnInit {
   getAllProfessors() {
     this.professorsService.getAllProfessors().subscribe((professors: any) => {
       this.professors = professors;
-
       this.filterProfessor = professors;
     });
   }
@@ -32,7 +36,9 @@ export class ProfessorsComponent implements OnInit {
   }
 
   deleteProfessor(id: number) {
-    this.professorsService.deleteProfessor(id).subscribe();
+    this.professorsService.deleteProfessor(id).subscribe(() => {
+      window.location.reload();
+    });
   }
   createProfessor(professor: Professors) {
     this.professorsService.createProfessor(professor).subscribe();
@@ -52,12 +58,18 @@ export class ProfessorsComponent implements OnInit {
     this.currentPage = page;
   }
 
-  applyFilter(event: Event): void {
-    let searchTherm = (event.target as HTMLInputElement).value;
-    searchTherm = searchTherm.toLowerCase();
+  applyFilter(searchText: string): void {
+    searchText = searchText.toLowerCase();
 
     this.filterProfessor = this.professors.filter((professors) => {
-      return professors.ImePrezimeProfesor.toLowerCase().includes(searchTherm);
+      return professors.ImePrezimeProfesor.toLowerCase().includes(searchText);
     });
+    this.statusFilter = true;
+  }
+
+  resetFilter() {
+    this.searchText = '';
+    this.applyFilter('');
+    this.statusFilter = false;
   }
 }
