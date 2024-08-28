@@ -63,6 +63,7 @@
             {{ prof.ImePrezimeProfesor }}
           </option>
         </select>
+
         <small
           class="text-danger"
           *ngIf="
@@ -74,7 +75,21 @@
         </small>
       </div>
     </div>
-
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Procenat profesora na ovom predmetu</label>
+        <input class="form-control" type="number" formControlName="procenat" />
+        <small
+          class="text-danger"
+          *ngIf="
+            subjectForm.get('popustPrograma')?.invalid &&
+            subjectForm.get('popustPrograma')?.touched
+          "
+        >
+          Unesite procenat profesora na ovom predmetu
+        </small>
+      </div>
+    </div>
     <div class="col d-flex justify-content-center align-items-center mb-3">
       <button
         class="btn btn-primary w-25 fw-bold fs-5"

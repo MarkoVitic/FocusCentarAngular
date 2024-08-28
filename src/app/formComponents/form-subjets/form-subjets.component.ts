@@ -10,6 +10,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProfessorsService } from '../../services/professorService/professors.service';
 import { Professors } from '../../models/professors';
+import { validateVerticalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-form-subjets',
@@ -20,6 +21,7 @@ export class FormSubjetsComponent implements OnInit {
   subjectForm: FormGroup = new FormGroup({});
   idSubject: number;
   allProfessors: Professors[] = [];
+  procenta: number;
 
   constructor(
     private subjectsService: SubjetsService,
@@ -37,6 +39,7 @@ export class FormSubjetsComponent implements OnInit {
       ukupnaCijenaPrograma: [''],
       idProfesor: ['', Validators.required],
       idPredmet: this.idSubject,
+      procenat: ['', Validators.required],
     });
     // Chekin for Params is there any
     let id = this.activeRoute.snapshot.paramMap.get('id');
