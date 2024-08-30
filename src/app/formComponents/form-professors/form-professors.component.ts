@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FormProfessorsComponent implements OnInit {
   professorForm: FormGroup = new FormGroup({});
   professor: Professors = new Professors();
+  idPredemt: number;
   idProfessor: number;
 
   constructor(
@@ -26,15 +27,19 @@ export class FormProfessorsComponent implements OnInit {
       kontaktProfesor: ['', Validators.required],
       emailProfesor: ['', [Validators.email]],
       adresaProfesor: [''],
-      procenatProfesor: ['', Validators.required],
+      procenat: [''],
+      idPredmet: [''],
+      idProfesor: [''],
     });
     //Cheking for Paras is there any
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    let predmetId = this.activatedRoute.snapshot.paramMap.get('predmetId');
+    let profesorId = this.activatedRoute.snapshot.paramMap.get('profesorId');
 
-    if (id) {
-      this.idProfessor = parseInt(id);
+    if (predmetId && profesorId) {
+      this.idPredemt = parseInt(predmetId);
+      this.idProfessor = parseInt(profesorId);
       let professor = this.professorsService
-        .getOneProfessor(parseInt(id))
+        .getOneProfessor(parseInt(predmetId), parseInt(profesorId))
         .subscribe((professor: any) => {
           console.log(professor);
           this.professorForm.patchValue(professor);

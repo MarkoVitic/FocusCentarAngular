@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjetsService } from '../../services/subjetsService/subjets.service';
 import { Subjets } from '../../models/subjets';
-import {
-  FormBuilder,
-  FormGroup,
-  MaxValidator,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProfessorsService } from '../../services/professorService/professors.service';
 import { Professors } from '../../models/professors';
-import { validateVerticalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-form-subjets',
@@ -57,6 +51,7 @@ export class FormSubjetsComponent implements OnInit {
   onSubmit() {
     if (this.subjectForm.valid) {
       if (!this.idSubject) {
+        console.log(this.subjectForm.value);
         this.subjectsService
           .createSubjets(this.subjectForm.value)
           .subscribe(() => {
@@ -75,8 +70,10 @@ export class FormSubjetsComponent implements OnInit {
     }
   }
   getAllProfessors() {
-    this.professorsService.getAllProfessors().subscribe((professors: any) => {
-      this.allProfessors = professors;
-    });
+    this.professorsService
+      .getAllFromTableProfessors()
+      .subscribe((professors: any) => {
+        this.allProfessors = professors;
+      });
   }
 }

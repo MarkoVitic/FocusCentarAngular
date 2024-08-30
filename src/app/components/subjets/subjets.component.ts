@@ -25,6 +25,7 @@ export class SubjetsComponent implements OnInit {
   getAllSubjets() {
     this.subjetService.getAllSubjets().subscribe((subjets: any) => {
       this.subjets = subjets;
+
       this.filterSubjets = subjets;
     });
   }
@@ -47,12 +48,13 @@ export class SubjetsComponent implements OnInit {
     this.currentPage = page;
   }
   applyFilter(searchText: string): void {
+    console.log(searchText);
     searchText = searchText.toLowerCase();
 
     this.filterSubjets = this.subjets.filter((subjets) => {
       return (
-        subjets.ImePrezimeProfesor.toLowerCase().includes(searchText) ||
-        subjets.nazivPredmeta.toLowerCase().includes(searchText)
+        subjets.nazivPredmeta?.toLowerCase().includes(searchText) ||
+        subjets.ImePrezimeProfesor?.toLowerCase().includes(searchText)
       );
     });
     this.statusFilter = true;

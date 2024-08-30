@@ -4,10 +4,11 @@ export class Professors {
   kontaktProfesor: string;
   emailProfesor: string;
   adresaProfesor: string;
-  procenatProfesor: number;
-  prihodMjesecniProfesor: number;
-  prihodUkupni: number;
+  procenat: number;
+  mjesecniPrihod: number;
+  ukupniPrihod: number;
   nazivPredmeta: string;
+  idPredmet: number;
   kreirano: Date;
   azurirano: Date;
 }

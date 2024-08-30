@@ -31,14 +31,22 @@ export class ProfessorsComponent implements OnInit {
       this.filterProfessor = professors;
     });
   }
-  getOneProfessor(id: number) {
-    this.professorsService.getOneProfessor(id).subscribe();
+  editProfessor(idPredemt: number, idProfesor: number) {
+    this.professorsService
+      .getOneProfessor(idPredemt, idProfesor)
+      .subscribe(() => {
+        this.router.navigateByUrl(
+          `/professors/form/${idPredemt}/${idProfesor}`
+        );
+      });
   }
 
-  deleteProfessor(id: number) {
-    this.professorsService.deleteProfessor(id).subscribe(() => {
-      window.location.reload();
-    });
+  deleteProfessor(idPredmet: number, idProfesor: number) {
+    this.professorsService
+      .deleteProfessor(idPredmet, idProfesor)
+      .subscribe(() => {
+        window.location.reload();
+      });
   }
   createProfessor(professor: Professors) {
     this.professorsService.createProfessor(professor).subscribe();
@@ -62,7 +70,7 @@ export class ProfessorsComponent implements OnInit {
     searchText = searchText.toLowerCase();
 
     this.filterProfessor = this.professors.filter((professors) => {
-      return professors.ImePrezimeProfesor.toLowerCase().includes(searchText);
+      return professors.ImePrezimeProfesor?.toLowerCase().includes(searchText);
     });
     this.statusFilter = true;
   }

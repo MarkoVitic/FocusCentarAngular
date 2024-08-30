@@ -41,36 +41,29 @@
         <th>Mjesečni prihod</th>
         <th>Ukupni prihod</th>
 
-        <th>Kontakt</th>
         <th>Opcije</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let professor of displayList(currentPage)">
+      <tr *ngFor="let professor of displayList(currentPage); let i = index">
         <td>{{ professor.ImePrezimeProfesor }}</td>
         <td>{{ professor.nazivPredmeta }}</td>
 
-        <td>{{ professor.procenatProfesor | number : "1.2" }}</td>
-        <td>
-          {{
-            (professor.prihodMjesecniProfesor * professor.procenatProfesor) /
-              100
-          }}
-        </td>
-        <td>{{ professor.prihodUkupni }}</td>
+        <td>{{ professor.procenat }}</td>
+        <td>{{ professor.mjesecniPrihod }}</td>
+        <td>{{ professor.ukupniPrihod }}</td>
 
-        <td>{{ professor.kontaktProfesor }}</td>
         <td>
           <button
             class="btn btn-sm btn-danger mx-1"
-            (click)="deleteProfessor(professor.idProfesor)"
+            (click)="deleteProfessor(professor.idPredmet, professor.idProfesor)"
           >
             <i class="bi bi-trash mx-1"></i>
             Izbriši
           </button>
           <button
             class="btn btn-sm btn-secondary mx-1"
-            [routerLink]="['/professors/form/', professor.idProfesor]"
+            (click)="editProfessor(professor.idPredmet, professor.idProfesor)"
           >
             <i class="bi bi-pencil mx-1"></i>
             Izmijeni

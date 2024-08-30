@@ -4,8 +4,8 @@ export class Subjets {
   cijenaPrograma: number;
   popustPrograma: number;
   ukupnaCijenaPrograma: number;
-  kreirano: Date;
-  azurirano: Date;
   idProfesor: number;
   ImePrezimeProfesor: string;
+  kreirano: Date;
+  azurirano: Date;
 }

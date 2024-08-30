@@ -44,7 +44,6 @@ export class FormStudentPaymentComponent implements OnInit {
       iznosUplate: ['', Validators.required],
       idUcenik: this.student?.ImePrezimeUcenika,
       idPredmet: this.subject?.nazivPredmeta,
-      idProfesor: this.subject?.idProfesor,
     });
   }
 

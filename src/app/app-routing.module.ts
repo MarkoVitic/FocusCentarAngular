@@ -13,7 +13,10 @@ import { FormStudentPaymentComponent } from './formComponents/form-student-payme
 const routes: Routes = [
   { path: 'professors', component: ProfessorsComponent },
   { path: 'professors/form', component: FormProfessorsComponent },
-  { path: 'professors/form/:id', component: FormProfessorsComponent },
+  {
+    path: 'professors/form/:predmetId/:profesorId',
+    component: FormProfessorsComponent,
+  },
 
   { path: 'students', component: StudentsComponent },
   { path: 'students/form', component: FormStudentsComponent },

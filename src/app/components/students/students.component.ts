@@ -66,8 +66,8 @@ export class StudentsComponent implements OnInit {
 
     this.filterStudents = this.students.filter((student) => {
       return (
-        student.ImePrezimeUcenika.toLowerCase().includes(searchText) ||
-        student.nazivPredmeta.toLowerCase().includes(searchText)
+        student.ImePrezimeUcenika?.toLowerCase().includes(searchText) ||
+        student.nazivPredmeta?.toLowerCase().includes(searchText)
       );
     });
     this.statusFilter = true;

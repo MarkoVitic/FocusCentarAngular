@@ -15,11 +15,20 @@ export class ProfessorsService {
   constructor(private http: HttpClient) {}
 
   getAllProfessors(): Observable<Professors[]> {
-    return this.http.get<Professors[]>('http://127.0.0.1:3000/professorsall');
+    return this.http.get<Professors[]>('http://127.0.0.1:3000/professors');
   }
 
-  getOneProfessor(id: number): Observable<Professors> {
-    return this.http.get<Professors>(this.apiUrl + `/${id}`);
+  getAllFromTableProfessors(): Observable<Professors[]> {
+    return this.http.get<Professors[]>('http://127.0.0.1:3000/professorstable');
+  }
+
+  getOneProfessor(
+    idPredemt: number,
+    idProfesor: number
+  ): Observable<Professors> {
+    return this.http.get<Professors>(
+      this.apiUrl + `/${idPredemt}` + `/${idProfesor}`
+    );
   }
   createProfessor(professor: Professors): Observable<Professors> {
     console.log(professor);
@@ -28,7 +37,7 @@ export class ProfessorsService {
   updateProfessor(id: number, professor: Professors) {
     return this.http.put<Professors>(this.apiUrl + `/${id}`, professor);
   }
-  deleteProfessor(id: number) {
-    return this.http.delete(this.apiUrl + `/${id}`);
+  deleteProfessor(idPredemt: number, idProfesor: number) {
+    return this.http.delete(this.apiUrl + `/${idPredemt}` + `/${idProfesor}`);
   }
 }
