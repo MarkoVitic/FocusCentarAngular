@@ -28,7 +28,7 @@ const routes: Routes = [
 
   { path: 'subjects', component: SubjetsComponent },
   { path: 'subjects/form', component: FormSubjetsComponent },
-  { path: 'subjects/form/:id', component: FormSubjetsComponent },
+  { path: 'subjects/form/:id/:idProfessor', component: FormSubjetsComponent },
 
   { path: 'payments', component: PaymentsComponent },
   { path: 'payments/form', component: FormPaymentsComponent },

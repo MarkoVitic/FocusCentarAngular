@@ -1,7 +1,6 @@
+import { SubjetsService } from './../../services/subjetsService/subjets.service';
 import { Subjets } from './../../models/subjets';
 import { Component, OnInit } from '@angular/core';
-
-import { SubjetsService } from '../../services/subjetsService/subjets.service';
 
 @Component({
   selector: 'app-subjets',

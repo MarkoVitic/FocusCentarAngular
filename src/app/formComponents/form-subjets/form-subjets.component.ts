@@ -14,6 +14,7 @@ import { Professors } from '../../models/professors';
 export class FormSubjetsComponent implements OnInit {
   subjectForm: FormGroup = new FormGroup({});
   idSubject: number;
+  idProfessor: number;
   allProfessors: Professors[] = [];
   procenta: number;
 
@@ -37,10 +38,12 @@ export class FormSubjetsComponent implements OnInit {
     });
     // Chekin for Params is there any
     let id = this.activeRoute.snapshot.paramMap.get('id');
-    if (id) {
+    let idProfessor = this.activeRoute.snapshot.paramMap.get('idProfessor');
+    if (id && idProfessor) {
       this.idSubject = parseInt(id);
+      this.idProfessor = parseInt(idProfessor);
       this.subjectsService
-        .getOneSubjet(parseInt(id))
+        .getOneSubjet(parseInt(id), parseInt(idProfessor))
         .subscribe((subject: any) => {
           console.log(subject);
           this.subjectForm.patchValue(subject.data[0]);

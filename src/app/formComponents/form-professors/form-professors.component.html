@@ -93,11 +93,20 @@
 
     <div class="col d-flex justify-content-center align-items-center mb-3">
       <button
+        *ngIf="!idProfessor"
         class="btn btn-primary w-25 fw-bold fs-5"
         type="submit"
         [disabled]="professorForm.invalid"
       >
         Dodaj
+      </button>
+      <button
+        *ngIf="idProfessor"
+        class="btn btn-primary w-25 fw-bold fs-5"
+        type="submit"
+        [disabled]="professorForm.invalid"
+      >
+        Izmijeni
       </button>
     </div>
   </form>

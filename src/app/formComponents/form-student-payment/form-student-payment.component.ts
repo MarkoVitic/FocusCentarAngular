@@ -19,6 +19,7 @@ export class FormStudentPaymentComponent implements OnInit {
   subject: Subjets;
   idStudent: number;
   idSubject: number;
+  idProfessor: number;
 
   constructor(
     private studentsService: StudentsService,
@@ -37,8 +38,12 @@ export class FormStudentPaymentComponent implements OnInit {
     if (idPredemt) {
       this.idSubject = parseInt(idPredemt);
     }
+    let idProfessor = this.activeRoute.snapshot.paramMap.get('idProfessor');
+    if (idProfessor) {
+      this.idProfessor = parseInt(idProfessor);
+    }
     this.getStudentDetails(this.idStudent);
-    this.getSubjectDetails(this.idSubject);
+    this.getSubjectDetails(this.idSubject, this.idProfessor);
 
     this.formStudenPayment = this.formBuilder.group({
       iznosUplate: ['', Validators.required],
@@ -53,10 +58,12 @@ export class FormStudentPaymentComponent implements OnInit {
     });
   }
 
-  getSubjectDetails(id: number) {
-    this.subjectService.getOneSubjet(id).subscribe((subjectDB: any) => {
-      this.subject = subjectDB.data[0];
-    });
+  getSubjectDetails(id: number, idProfessor: number) {
+    this.subjectService
+      .getOneSubjet(id, idProfessor)
+      .subscribe((subjectDB: any) => {
+        this.subject = subjectDB.data[0];
+      });
   }
 
   onSubmit() {

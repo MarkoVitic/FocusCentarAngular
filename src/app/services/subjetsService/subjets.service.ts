@@ -18,8 +18,8 @@ export class SubjetsService {
     return this.http.get<Subjets[]>('http://127.0.0.1:3000/subjetsall');
   }
 
-  getOneSubjet(id: number): Observable<Subjets> {
-    return this.http.get<Subjets>(this.apiUrl + `/${id}`);
+  getOneSubjet(id: number, idProfessor: number): Observable<Subjets> {
+    return this.http.get<Subjets>(this.apiUrl + `/${id}` + `/${idProfessor}`);
   }
   createSubjets(subject: Subjets) {
     return this.http.post<Subjets>(this.apiUrl, subject);

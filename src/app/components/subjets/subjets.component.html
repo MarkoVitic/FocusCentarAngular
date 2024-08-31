@@ -62,7 +62,11 @@
           </button>
           <button
             class="btn btn-sm btn-secondary mx-1"
-            [routerLink]="['/subjects/form', subject.idPredmet]"
+            [routerLink]="[
+              '/subjects/form',
+              subject.idPredmet,
+              subject.idProfesor
+            ]"
           >
             <i class="bi bi-pencil mx-1"></i>
             Izmijeni

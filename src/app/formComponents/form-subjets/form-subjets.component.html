@@ -92,11 +92,20 @@
     </div>
     <div class="col d-flex justify-content-center align-items-center mb-3">
       <button
+        *ngIf="!idSubject"
         class="btn btn-primary w-25 fw-bold fs-5"
         type="submit"
         [disabled]="subjectForm.invalid"
       >
         Dodaj
+      </button>
+      <button
+        *ngIf="idSubject"
+        class="btn btn-primary w-25 fw-bold fs-5"
+        type="submit"
+        [disabled]="subjectForm.invalid"
+      >
+        Izmijeni
       </button>
     </div>
   </form>
