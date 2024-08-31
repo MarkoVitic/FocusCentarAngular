@@ -28,8 +28,9 @@ export class SubjetsComponent implements OnInit {
       this.filterSubjets = subjets;
     });
   }
-  deleteSubject(id: number) {
-    this.subjetService.deleteSubjet(id).subscribe(() => {
+  deleteSubject(id: number, idProfesor: number) {
+    console.log(id, idProfesor);
+    this.subjetService.deleteSubjet(id, idProfesor).subscribe(() => {
       window.location.reload();
     });
   }
@@ -47,7 +48,6 @@ export class SubjetsComponent implements OnInit {
     this.currentPage = page;
   }
   applyFilter(searchText: string): void {
-    console.log(searchText);
     searchText = searchText.toLowerCase();
 
     this.filterSubjets = this.subjets.filter((subjets) => {

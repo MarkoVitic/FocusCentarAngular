@@ -54,7 +54,6 @@ export class FormSubjetsComponent implements OnInit {
   onSubmit() {
     if (this.subjectForm.valid) {
       if (!this.idSubject) {
-        console.log(this.subjectForm.value);
         this.subjectsService
           .createSubjets(this.subjectForm.value)
           .subscribe(() => {
@@ -62,7 +61,6 @@ export class FormSubjetsComponent implements OnInit {
             this.subjectForm.reset(); // Reset form after successful creation
           });
       } else {
-        console.log(this.subjectForm.value);
         this.subjectsService
           .updateSubjet(this.idSubject, this.subjectForm.value)
           .subscribe(() => {
@@ -77,6 +75,15 @@ export class FormSubjetsComponent implements OnInit {
       .getAllFromTableProfessors()
       .subscribe((professors: any) => {
         this.allProfessors = professors;
+      });
+  }
+
+  createInTabelProfessorsStudents() {
+    this.subjectsService
+      .crateInsideProdessorSubjectTable(this.subjectForm.value)
+      .subscribe(() => {
+        this.router.navigateByUrl('/subjects'); // Only navigate after professor is created
+        this.subjectForm.reset(); // Reset form after successful creation
       });
   }
 }

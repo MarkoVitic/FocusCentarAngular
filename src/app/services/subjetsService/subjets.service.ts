@@ -21,13 +21,21 @@ export class SubjetsService {
   getOneSubjet(id: number, idProfessor: number): Observable<Subjets> {
     return this.http.get<Subjets>(this.apiUrl + `/${id}` + `/${idProfessor}`);
   }
+
   createSubjets(subject: Subjets) {
     return this.http.post<Subjets>(this.apiUrl, subject);
+  }
+
+  crateInsideProdessorSubjectTable(subject: Subjets) {
+    return this.http.post<Subjets>(
+      `http://127.0.0.1:3000/professorSubject`,
+      subject
+    );
   }
   updateSubjet(id: number, subject: Subjets) {
     return this.http.put<Subjets>(this.apiUrl + `/${id}`, subject);
   }
-  deleteSubjet(id: number) {
-    return this.http.delete(this.apiUrl + `/${id}`);
+  deleteSubjet(idPredemt: number, idProfesor: number) {
+    return this.http.delete(this.apiUrl + `/${idPredemt}` + `/${idProfesor}`);
   }
 }

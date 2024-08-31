@@ -1,5 +1,6 @@
 <div class="container">
-  <h2 class="mb-5">Dodavanje Predmeta</h2>
+  <h2 *ngIf="!idSubject" class="mb-5">Dodavanje predmeta</h2>
+  <h2 *ngIf="idSubject" class="mb-5">Izmijeni predmet</h2>
   <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
       <div class="col">
@@ -106,6 +107,14 @@
         [disabled]="subjectForm.invalid"
       >
         Izmijeni
+      </button>
+      <button
+        *ngIf="idSubject"
+        class="btn btn-secondary w-25 fw-bold fs-5 mx-4"
+        type="submit"
+        (click)="createInTabelProfessorsStudents()"
+      >
+        Dodijeli predmet profesoru
       </button>
     </div>
   </form>
