@@ -15,6 +15,8 @@ export class FormStudentsComponent implements OnInit {
   studentForm: FormGroup = new FormGroup({});
   idStudent: number;
   allSubjects: Subjets[] = [];
+
+  ImePrezimeProfesor: string | null;
   constructor(
     private studentsServices: StudentsService,
     private FormBuilder: FormBuilder,
@@ -35,6 +37,8 @@ export class FormStudentsComponent implements OnInit {
       ocjenaTri: [''],
       ocjenaCetiri: [''],
       idPredmet: [''],
+      idProfesor: [''],
+
       ukupnoPlacenoDoSada: [''],
       popust: [''],
     });
@@ -78,5 +82,15 @@ export class FormStudentsComponent implements OnInit {
     this.subjetsService
       .getAllSubjets()
       .subscribe((sub) => (this.allSubjects = sub));
+  }
+
+  onPredmetChange(event: Event) {
+    let values = parseInt((event.target as HTMLSelectElement).value);
+    console.log(values);
+    this.allSubjects.filter((sub) => {
+      sub.idPredmet === values
+        ? (this.ImePrezimeProfesor = sub.ImePrezimeProfesor)
+        : null;
+    });
   }
 }

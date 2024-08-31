@@ -1,5 +1,6 @@
 <div class="container">
-  <h2 class="mb-5">Dodavanje profesora</h2>
+  <h2 *ngIf="!idProfessor" class="mb-5">Dodavanje profesora</h2>
+  <h2 *ngIf="idProfessor" class="mb-5">Izmijene profesora</h2>
 
   <form [formGroup]="professorForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">

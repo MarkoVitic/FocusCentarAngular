@@ -154,25 +154,6 @@
         </div>
       </div>
       <div class="col">
-        <label class="form-label">idPredmet</label>
-        <select class="form-control" formControlName="idPredmet">
-          <option *ngFor="let sub of allSubjects" [value]="sub.idPredmet">
-            {{ sub.nazivPredmeta }}
-          </option>
-        </select>
-        <small
-          class="text-danger"
-          *ngIf="
-            studentForm.get('idPredmet')?.invalid &&
-            studentForm.get('idPredmet')?.touched
-          "
-        >
-          Morate odabrati Predmet
-        </small>
-      </div>
-    </div>
-    <div class="row mb-3">
-      <div class="col">
         <label class="form-label">Dodatni Popust</label>
         <input
           class="form-control"
@@ -189,7 +170,41 @@
           Unesit Dodatni Popust
         </div>
       </div>
-      <div></div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">idPredmet</label>
+        <select
+          class="form-control"
+          formControlName="idPredmet"
+          (change)="onPredmetChange($event)"
+        >
+          <option *ngFor="let sub of allSubjects" [value]="sub.idPredmet">
+            {{ sub.nazivPredmeta }}
+          </option>
+        </select>
+
+        <small
+          class="text-danger"
+          *ngIf="
+            studentForm.get('idPredmet')?.invalid &&
+            studentForm.get('idPredmet')?.touched
+          "
+        >
+          Morate odabrati Predmet
+        </small>
+      </div>
+
+      <div class="col">
+        <div class="mb-3">
+          <div class="mb-3">
+            <label class="form-label">Ime Profesora</label>
+            <p class="form-text border p-2 rounded bg-light">
+              {{ ImePrezimeProfesor }}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col d-flex justify-content-center align-items-center mb-3">
       <button
