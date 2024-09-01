@@ -17,6 +17,7 @@ export class FormSubjetsComponent implements OnInit {
   idProfessor: number;
   allProfessors: Professors[] = [];
   procenta: number;
+  dodjeljivanje: boolean = false;
 
   constructor(
     private subjectsService: SubjetsService,
@@ -60,7 +61,7 @@ export class FormSubjetsComponent implements OnInit {
             this.router.navigateByUrl('/subjects'); // Only navigate after professor is created
             this.subjectForm.reset(); // Reset form after successful creation
           });
-      } else {
+      } else if (this.idSubject && !this.dodjeljivanje) {
         this.subjectsService
           .updateSubjet(this.idSubject, this.subjectForm.value)
           .subscribe(() => {
@@ -79,10 +80,12 @@ export class FormSubjetsComponent implements OnInit {
   }
 
   createInTabelProfessorsStudents() {
+    this.dodjeljivanje = true;
     this.subjectsService
       .crateInsideProdessorSubjectTable(this.subjectForm.value)
       .subscribe(() => {
         this.router.navigateByUrl('/subjects'); // Only navigate after professor is created
+        this.dodjeljivanje = false;
         this.subjectForm.reset(); // Reset form after successful creation
       });
   }

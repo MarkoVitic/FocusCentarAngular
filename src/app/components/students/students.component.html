@@ -37,6 +37,7 @@
       <tr>
         <th>Ime i prezime</th>
         <th>Predmet</th>
+        <th>Profesor</th>
 
         <th>Oci. 1</th>
         <th>Oci. 2</th>
@@ -51,6 +52,7 @@
       <tr *ngFor="let student of displayList(currentPage)">
         <td>{{ student.ImePrezimeUcenika }}</td>
         <td>{{ student.nazivPredmeta }}</td>
+        <td>{{ student.ImePrezimeProfesor }}</td>
 
         <td>{{ student.ocjenaJedan }}</td>
         <td>{{ student.ocjenaDva }}</td>
@@ -59,7 +61,7 @@
         <td>{{ student.popust }}</td>
         <td>{{ student.ukupnaCijenaPrograma }}</td>
         <td>{{ student.ukupnoPlacenoDoSada }}</td>
-        <td>
+        <td class="flex-container">
           <a
             class="btn btn-sm btn-primary"
             href="students/formpayment/{{ student.idUcenik }}/{{

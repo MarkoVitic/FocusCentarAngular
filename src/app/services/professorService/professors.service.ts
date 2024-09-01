@@ -37,7 +37,12 @@ export class ProfessorsService {
   updateProfessor(id: number, professor: Professors) {
     return this.http.put<Professors>(this.apiUrl + `/${id}`, professor);
   }
-  deleteProfessor(idPredemt: number, idProfesor: number) {
-    return this.http.delete(this.apiUrl + `/${idPredemt}` + `/${idProfesor}`);
+  deleteProfessor(idProfesor: number) {
+    return this.http.delete(this.apiUrl + `/${idProfesor}`);
+  }
+  deleteFromProdessorSubjet(idProfesoriPredmeti: number) {
+    return this.http.delete(
+      `http://127.0.0.1:3000/professorSubjects/${idProfesoriPredmeti}`
+    );
   }
 }

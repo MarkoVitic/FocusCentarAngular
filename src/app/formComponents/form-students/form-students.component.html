@@ -1,5 +1,6 @@
 <div class="container">
-  <h2 class="mb-5">Dodavanje Ucenika</h2>
+  <h2 class="mb-5" *ngIf="!idStudent">Dodavanje Ucenika</h2>
+  <h2 class="mb-5" *ngIf="idStudent">Izmjene ucenika</h2>
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
       <div class="col">
@@ -211,11 +212,28 @@
     </div>
     <div class="col d-flex justify-content-center align-items-center mb-3">
       <button
+        *ngIf="!idStudent"
         class="btn btn-primary w-25 fw-bold fs-5"
         type="submit"
         [disabled]="studentForm.invalid"
       >
         Dodaj
+      </button>
+      <button
+        *ngIf="idStudent"
+        class="btn btn-primary w-25 fw-bold fs-5"
+        type="submit"
+        [disabled]="studentForm.invalid"
+      >
+        Izmijeni
+      </button>
+      <button
+        *ngIf="idStudent"
+        class="btn btn-secondary w-25 fw-bold fs-5 mx-4"
+        type="submit"
+        (click)="addAntoherSubjectToStudent()"
+      >
+        Dodijeli predmet učeniku
       </button>
     </div>
   </form>

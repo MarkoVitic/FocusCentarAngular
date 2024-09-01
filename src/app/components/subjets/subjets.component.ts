@@ -28,11 +28,24 @@ export class SubjetsComponent implements OnInit {
       this.filterSubjets = subjets;
     });
   }
-  deleteSubject(id: number, idProfesor: number) {
-    console.log(id, idProfesor);
-    this.subjetService.deleteSubjet(id, idProfesor).subscribe(() => {
-      window.location.reload();
-    });
+  deleteSubject(id: number, idProfesoriPredmeti: number) {
+    console.log(id, idProfesoriPredmeti);
+
+    if (idProfesoriPredmeti) {
+      this.subjetService
+        .deleteFromSubjectProfesorTable(idProfesoriPredmeti)
+        .subscribe((a) => {
+          console.log(a);
+          window.location.reload();
+        });
+    } else if (!idProfesoriPredmeti) {
+      this.subjetService
+        .deleteSubjet(id, idProfesoriPredmeti)
+        .subscribe((a) => {
+          console.log(a);
+          window.location.reload();
+        });
+    }
   }
   displayList(page: number) {
     const strat = this.rows * (page - 1);

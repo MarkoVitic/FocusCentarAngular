@@ -9,6 +9,7 @@ export class Professors {
   ukupniPrihod: number;
   nazivPredmeta: string;
   idPredmet: number;
+  idProfesoriPredmeti: number;
   kreirano: Date;
   azurirano: Date;
 }

@@ -56,7 +56,12 @@
         <td>
           <button
             class="btn btn-sm btn-danger mx-1"
-            (click)="deleteProfessor(professor.idPredmet, professor.idProfesor)"
+            (click)="
+              deleteProfessor(
+                professor.idProfesor,
+                professor.idProfesoriPredmeti
+              )
+            "
           >
             <i class="bi bi-trash mx-1"></i>
             Izbriši

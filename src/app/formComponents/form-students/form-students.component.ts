@@ -1,4 +1,3 @@
-import { group } from 'console';
 import { Component, OnInit } from '@angular/core';
 import { Students } from '../../models/students';
 import { StudentsService } from '../../services/studentsService/students.service';
@@ -15,6 +14,7 @@ export class FormStudentsComponent implements OnInit {
   studentForm: FormGroup = new FormGroup({});
   idStudent: number;
   allSubjects: Subjets[] = [];
+  dodjeljivanje: boolean = false;
 
   ImePrezimeProfesor: string | null;
   constructor(
@@ -63,7 +63,7 @@ export class FormStudentsComponent implements OnInit {
             this.router.navigateByUrl('/students'); // Only navigate after professor is created
             this.studentForm.reset(); // Reset form after successful creation
           });
-      } else {
+      } else if (this.idStudent && !this.dodjeljivanje) {
         console.log(this.idStudent);
         console.log(this.studentForm.value);
         this.studentsServices
@@ -90,5 +90,19 @@ export class FormStudentsComponent implements OnInit {
         ? (this.ImePrezimeProfesor = sub.ImePrezimeProfesor)
         : null;
     });
+  }
+
+  addAntoherSubjectToStudent() {
+    this.dodjeljivanje = true;
+    if (this.studentForm.valid) {
+      console.log(this.studentForm.value);
+      this.studentsServices
+        .createStudent(this.studentForm.value)
+        .subscribe(() => {
+          this.router.navigateByUrl('/students'); // Only navigate after professor is created
+          this, (this.dodjeljivanje = false);
+          this.studentForm.reset(); // Reset form after successful creation
+        });
+    }
   }
 }

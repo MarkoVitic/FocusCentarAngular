@@ -21,7 +21,7 @@ export class StudentsComponent implements OnInit {
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
     this.getAllStudentsWitihNameSubject();
-    this.getFinalPrice();
+    // this.getFinalPrice();
   }
 
   getAllStudentsWitihNameSubject() {
@@ -38,15 +38,15 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  getFinalPrice() {
-    this.students = this.students.map((student: Students) => {
-      if (student.popust && student.ukupnaCijenaPrograma) {
-        student.ukupnaCijenaPrograma -=
-          (student.ukupnaCijenaPrograma * student.popust) / 100;
-      }
-      return student;
-    });
-  }
+  // getFinalPrice() {
+  //   this.students = this.students.map((student: Students) => {
+  //     if (student.popust && student.ukupnaCijenaPrograma) {
+  //       student.ukupnaCijenaPrograma -=
+  //         (student.ukupnaCijenaPrograma * student.popust) / 100;
+  //     }
+  //     return student;
+  //   });
+  // }
 
   displayList(page: number) {
     const strat = this.rows * (page - 1);

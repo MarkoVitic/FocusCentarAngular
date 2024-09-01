@@ -1,0 +1,15 @@
+/* Default flex container in row layout */
+.flex-container {
+  display: flex;
+  flex-direction: row; /* Arrange items in a row by default */
+
+  align-items: center; /* Align items vertically */
+}
+
+/* Media query for screen widths 1366px or smaller */
+@media (max-width: 1366px) {
+  .flex-container {
+    flex-direction: column; /* Change to column layout */
+    align-items: stretch; /* Make items take full width of container */
+  }
+}

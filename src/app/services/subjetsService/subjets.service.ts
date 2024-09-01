@@ -38,4 +38,10 @@ export class SubjetsService {
   deleteSubjet(idPredemt: number, idProfesor: number) {
     return this.http.delete(this.apiUrl + `/${idPredemt}` + `/${idProfesor}`);
   }
+
+  deleteFromSubjectProfesorTable(idProfesoriPredmeti: number) {
+    return this.http.delete(
+      `http://127.0.0.1:3000/professorSubjects/${idProfesoriPredmeti}`
+    );
+  }
 }

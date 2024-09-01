@@ -41,12 +41,19 @@ export class ProfessorsComponent implements OnInit {
       });
   }
 
-  deleteProfessor(idPredmet: number, idProfesor: number) {
-    this.professorsService
-      .deleteProfessor(idPredmet, idProfesor)
-      .subscribe(() => {
+  deleteProfessor(idProfesor: number, idProfesoriPredmeti: number) {
+    console.log(idProfesoriPredmeti, idProfesor);
+    if (idProfesoriPredmeti) {
+      this.professorsService
+        .deleteFromProdessorSubjet(idProfesoriPredmeti)
+        .subscribe(() => {
+          window.location.reload();
+        });
+    } else if (!idProfesoriPredmeti) {
+      this.professorsService.deleteProfessor(idProfesor).subscribe(() => {
         window.location.reload();
       });
+    }
   }
   createProfessor(professor: Professors) {
     this.professorsService.createProfessor(professor).subscribe();
