@@ -34,21 +34,14 @@ export class FormStudentPaymentComponent implements OnInit {
     if (idUcenik) {
       this.idStudent = parseInt(idUcenik);
     }
-    let idPredemt = this.activeRoute.snapshot.paramMap.get('idPredmet');
-    if (idPredemt) {
-      this.idSubject = parseInt(idPredemt);
-    }
-    let idProfessor = this.activeRoute.snapshot.paramMap.get('idProfessor');
-    if (idProfessor) {
-      this.idProfessor = parseInt(idProfessor);
-    }
+
     this.getStudentDetails(this.idStudent);
-    this.getSubjectDetails(this.idSubject, this.idProfessor);
+    // this.getSubjectDetails(this.idSubject, this.idProfessor);
 
     this.formStudenPayment = this.formBuilder.group({
       iznosUplate: ['', Validators.required],
-      idUcenik: this.student?.ImePrezimeUcenika,
-      idPredmet: this.subject?.nazivPredmeta,
+      idUcenik: this.student?.idUcenik,
+      idProfesoriPredmeti: this.student?.idProfesoriPredmeti,
     });
   }
 
@@ -58,25 +51,23 @@ export class FormStudentPaymentComponent implements OnInit {
     });
   }
 
-  getSubjectDetails(id: number, idProfessor: number) {
-    this.subjectService
-      .getOneSubjet(id, idProfessor)
-      .subscribe((subjectDB: any) => {
-        this.subject = subjectDB.data[0];
-      });
-  }
+  // getSubjectDetails(id: number, idProfessor: number) {
+  //   this.subjectService
+  //     .getOneSubjet(id, idProfessor)
+  //     .subscribe((subjectDB: any) => {
+  //       this.subject = subjectDB.data[0];
+  //     });
+  // }
 
   onSubmit() {
-    let payment: any = {
-      iznosUplate: parseInt(this.formStudenPayment.value.iznosUplate),
-      idUcenik: this.student.idUcenik,
-      idPredmet: this.student.idPredmet,
-      idProfesor: parseInt(this.formStudenPayment.value.idProfesor),
-    };
-
-    this.paymentService.createPayment(payment).subscribe(() => {
-      this.router.navigateByUrl('/payments'); // Only navigate after professor is created
-      this.formStudenPayment.reset(); // Reset form after successful creation
-    });
+    if (this.formStudenPayment.valid) {
+      console.log(this, this.formStudenPayment.value);
+      this.paymentService
+        .createPayment(this.formStudenPayment.value)
+        .subscribe(() => {
+          this.router.navigateByUrl('/payments'); // Only navigate after professor is created
+          this.formStudenPayment.reset(); // Reset form after successful creation
+        });
+    }
   }
 }

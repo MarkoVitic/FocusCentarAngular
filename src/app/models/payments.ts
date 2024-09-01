@@ -5,4 +5,5 @@ export class Payments {
   azurirano: Date;
   idUcenik: number;
   idPredmet: number;
+  idProfesoriPredmeti: number;
 }

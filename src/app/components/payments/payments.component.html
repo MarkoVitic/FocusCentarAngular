@@ -44,8 +44,9 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Ime i Prezime</th>
+        <th>Učenik</th>
         <th>Predmet</th>
+        <th>Profesor</th>
 
         <th>Iznos uplate</th>
         <th>Datum uplate</th>
@@ -55,6 +56,7 @@
       <tr *ngFor="let payment of displayList(currentPage)">
         <td>{{ payment.ImePrezimeUcenika }}</td>
         <td>{{ payment.nazivPredmeta }}</td>
+        <td>{{ payment.ImePrezimeProfesor }}</td>
 
         <td>{{ payment.iznosUplate }}</td>
         <td>{{ payment.kreirano | date : "dd/MM/yyyy" }}</td>

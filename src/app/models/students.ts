@@ -15,5 +15,6 @@ export class Students {
   nazivPredmeta: string;
   popust: number;
   ImePrezimeProfesor: string;
+  idProfesoriPredmeti: number;
   ukupnaCijenaPrograma: number;
 }
