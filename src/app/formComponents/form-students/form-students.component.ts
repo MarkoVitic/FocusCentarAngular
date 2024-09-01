@@ -36,9 +36,7 @@ export class FormStudentsComponent implements OnInit {
       ocjenaDva: [''],
       ocjenaTri: [''],
       ocjenaCetiri: [''],
-      idPredmet: [''],
-      idProfesor: [''],
-
+      idProfesoriPredmeti: [''],
       ukupnoPlacenoDoSada: [''],
       popust: [''],
     });
@@ -88,7 +86,7 @@ export class FormStudentsComponent implements OnInit {
     let values = parseInt((event.target as HTMLSelectElement).value);
     console.log(values);
     this.allSubjects.filter((sub) => {
-      sub.idPredmet === values
+      sub.idProfesoriPredmeti === values
         ? (this.ImePrezimeProfesor = sub.ImePrezimeProfesor)
         : null;
     });

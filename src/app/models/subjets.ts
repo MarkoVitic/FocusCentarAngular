@@ -6,6 +6,7 @@ export class Subjets {
   ukupnaCijenaPrograma: number;
   idProfesor: number;
   ImePrezimeProfesor: string;
+  idProfesoriPredmeti: number;
   kreirano: Date;
   azurirano: Date;
 }

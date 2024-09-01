@@ -176,10 +176,13 @@
         <label class="form-label">idPredmet</label>
         <select
           class="form-control"
-          formControlName="idPredmet"
+          formControlName="idProfesoriPredmeti"
           (change)="onPredmetChange($event)"
         >
-          <option *ngFor="let sub of allSubjects" [value]="sub.idPredmet">
+          <option
+            *ngFor="let sub of allSubjects"
+            [value]="sub.idProfesoriPredmeti"
+          >
             {{ sub.nazivPredmeta }}
           </option>
         </select>
@@ -187,8 +190,8 @@
         <small
           class="text-danger"
           *ngIf="
-            studentForm.get('idPredmet')?.invalid &&
-            studentForm.get('idPredmet')?.touched
+            studentForm.get('idProfesoriPredmeti')?.invalid &&
+            studentForm.get('idProfesoriPredmeti')?.touched
           "
         >
           Morate odabrati Predmet
