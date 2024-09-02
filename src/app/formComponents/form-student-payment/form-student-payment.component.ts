@@ -40,6 +40,8 @@ export class FormStudentPaymentComponent implements OnInit {
 
     this.formStudenPayment = this.formBuilder.group({
       iznosUplate: ['', Validators.required],
+      imeUcenika: this.student?.ImePrezimeUcenika,
+      predmet: this.student?.nazivPredmeta,
       idUcenik: this.student?.idUcenik,
       idProfesoriPredmeti: this.student?.idProfesoriPredmeti,
     });

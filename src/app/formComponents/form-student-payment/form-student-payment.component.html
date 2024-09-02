@@ -19,7 +19,7 @@
           Unesite iznos uplate
         </small>
       </div>
-      <div class="col">
+      <div class="col d-none">
         <label class="form-label">Učenik</label>
         <input
           class="form-control"
@@ -30,7 +30,33 @@
       </div>
     </div>
 
+    <!----------------------------------------->
     <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Ime učenika</label>
+        <input class="form-control" type="text" formControlName="imeUcenika" />
+        <small
+          class="text-danger"
+          *ngIf="
+            formStudenPayment.get('imeUcenika')?.invalid &&
+            formStudenPayment.get('imeUcenika')?.touched
+          "
+        >
+          Unesite iznos uplate
+        </small>
+      </div>
+      <div class="col">
+        <label class="form-label">Naziv predmeta</label>
+        <input
+          class="form-control"
+          type="text"
+          formControlName="predmet"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3 d-none">
       <div class="col">
         <label class="form-label">Predmet</label>
         <input

@@ -96,6 +96,8 @@ export class FormStudentsComponent implements OnInit {
     this.dodjeljivanje = true;
     if (this.studentForm.valid) {
       console.log(this.studentForm.value);
+      this.studentForm.value.ukupnoPlacenoDoSada = 0;
+      console.log(this.studentForm.value);
       this.studentsServices
         .createStudent(this.studentForm.value)
         .subscribe(() => {

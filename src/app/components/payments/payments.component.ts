@@ -13,6 +13,7 @@ export class PaymentsComponent implements OnInit {
   sortOrder: string;
   searchText: string;
   statusFilter: boolean = false;
+  statusDateFilter: boolean = false;
 
   currentPage: number = 1;
   rows: number = 10;
@@ -59,12 +60,10 @@ export class PaymentsComponent implements OnInit {
       );
     });
     this.statusFilter = true;
-    this.sortByDate(this.sortOrder);
   }
 
   sortByDate(sortValue: string) {
     this.sortOrder = sortValue;
-    console.log(this.sortOrder);
 
     if (this.sortOrder === 'novi') {
       // Sort by newest first
@@ -79,12 +78,16 @@ export class PaymentsComponent implements OnInit {
           new Date(a.kreirano).getTime() - new Date(b.kreirano).getTime()
       );
     }
-    this.statusFilter = true;
+    this.statusDateFilter = true;
   }
 
   resetFilter() {
     this.searchText = '';
     this.applyFilter('');
     this.statusFilter = false;
+  }
+  resetDateFilter() {
+    this.sortByDate('');
+    this.statusDateFilter = false;
   }
 }
