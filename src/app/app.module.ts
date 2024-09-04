@@ -24,6 +24,7 @@ import { FormPaymentsComponent } from './formComponents/form-payments/form-payme
 import { FormStudentPaymentComponent } from './formComponents/form-student-payment/form-student-payment.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSelectModule } from '@angular/material/select';
+import { GlobalDateComponent } from './components/global-date/global-date.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormSubjetsComponent,
     FormPaymentsComponent,
     FormStudentPaymentComponent,
+    GlobalDateComponent,
   ],
   imports: [
     BrowserModule,

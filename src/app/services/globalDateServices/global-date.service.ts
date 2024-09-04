@@ -11,6 +11,10 @@ export class GlobalDateService {
 
   constructor(private http: HttpClient) {}
 
+  getAllDates(): Observable<GlobalDate[]> {
+    return this.http.get<GlobalDate[]>(this.apiUrl);
+  }
+
   createGlobalDate(globalDate: GlobalDate): Observable<GlobalDate> {
     return this.http.post<GlobalDate>(this.apiUrl, globalDate);
   }

@@ -9,8 +9,11 @@ import { FormSubjetsComponent } from './formComponents/form-subjets/form-subjets
 import { PaymentsComponent } from './components/payments/payments.component';
 import { FormPaymentsComponent } from './formComponents/form-payments/form-payments.component';
 import { FormStudentPaymentComponent } from './formComponents/form-student-payment/form-student-payment.component';
+import { GlobalDateComponent } from './components/global-date/global-date.component';
 
 const routes: Routes = [
+  { path: '', component: GlobalDateComponent },
+
   { path: 'professors', component: ProfessorsComponent },
   { path: 'professors/form', component: FormProfessorsComponent },
   {

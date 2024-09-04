@@ -17,6 +17,7 @@ export class PaymentsComponent implements OnInit {
 
   currentPage: number = 1;
   rows: number = 10;
+  pageCount: number;
 
   constructor(private paymentService: PaymentsService) {}
   ngOnInit(): void {
@@ -27,11 +28,12 @@ export class PaymentsComponent implements OnInit {
     this.paymentService.getAllPayments().subscribe((payment: any) => {
       this.allPayments = payment.data;
       this.filterPayments = payment.data;
+      this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
     });
   }
 
-  deltePaymnet(id: number) {
-    this.paymentService.deletePayment(id).subscribe(() => {
+  deltePaymnet(id: number, idProfPred: number, idUcenk: number) {
+    this.paymentService.deletePayment(id, idProfPred, idUcenk).subscribe(() => {
       window.location.reload();
     });
   }
@@ -46,17 +48,25 @@ export class PaymentsComponent implements OnInit {
     const pageCount = Math.ceil(this.filterPayments.length / this.rows);
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
-  onPageChange(page: number) {
-    this.currentPage = page;
+  onPageChange(page: string) {
+    console.log(page);
+    console.log(this.pageCount);
+    if (page == 'predhodna' && this.currentPage > 1) {
+      this.currentPage -= 1;
+    } else if (page == 'sledeca' && this.currentPage < this.pageCount) {
+      this.currentPage += 1;
+    }
   }
 
   applyFilter(searchText: string): void {
     searchText = searchText.toLowerCase();
+    console.log(searchText);
 
     this.filterPayments = this.allPayments.filter((payment) => {
+      console.log(payment);
       return (
         payment.ImePrezimeUcenika.toLowerCase().includes(searchText) ||
-        payment.nazivPredmeta.toLowerCase().includes(searchText)
+        payment.nazivPredmeta?.toLowerCase().includes(searchText)
       );
     });
     this.statusFilter = true;

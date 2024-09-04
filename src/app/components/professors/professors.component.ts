@@ -16,6 +16,7 @@ export class ProfessorsComponent implements OnInit {
 
   currentPage: number = 1;
   rows: number = 10;
+  pageCount: number;
 
   constructor(
     private professorsService: ProfessorsService,
@@ -23,6 +24,7 @@ export class ProfessorsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getAllProfessors();
+    this.pageCount = Math.ceil(this.filterProfessor.length / this.rows);
   }
 
   getAllProfessors() {
@@ -69,8 +71,14 @@ export class ProfessorsComponent implements OnInit {
     const pageCount = Math.ceil(this.filterProfessor.length / this.rows);
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
-  onPageChange(page: number) {
-    this.currentPage = page;
+  onPageChange(page: string) {
+    console.log(page);
+    console.log(this.pageCount);
+    if (page == 'predhodna' && this.currentPage > 1) {
+      this.currentPage -= 1;
+    } else if (page == 'sledeca' && this.currentPage < this.pageCount) {
+      this.currentPage += 1;
+    }
   }
 
   applyFilter(searchText: string): void {

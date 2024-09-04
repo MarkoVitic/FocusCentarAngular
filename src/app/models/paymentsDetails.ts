@@ -7,6 +7,6 @@ export class PaymentDetails {
   idPredmet: number;
   ImePrezimeUcenika: string;
   nazivPredmeta: string;
-
+  idProfesoriPredmeti: number;
   ImePrezimeProfesor: string;
 }

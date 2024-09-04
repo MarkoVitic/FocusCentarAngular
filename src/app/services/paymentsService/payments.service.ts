@@ -27,7 +27,9 @@ export class PaymentsService {
   updatePayment(id: number, payment: Payments) {
     return this.http.put<Payments>(this.apiUrl + `$/{id}`, payment);
   }
-  deletePayment(id: number) {
-    return this.http.delete(this.apiUrl + `/${id}`);
+  deletePayment(id: number, idProfPred: number, idUcenk: number) {
+    return this.http.delete(
+      this.apiUrl + `/${id}` + `/${idProfPred}` + `/${idUcenk}`
+    );
   }
 }

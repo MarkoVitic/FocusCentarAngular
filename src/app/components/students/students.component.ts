@@ -17,10 +17,12 @@ export class StudentsComponent implements OnInit {
 
   currentPage: number = 1;
   rows: number = 10;
+  pageCount: number;
 
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
     this.getAllStudentsWitihNameSubject();
+    this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
     // this.getFinalPrice();
   }
 
@@ -58,8 +60,14 @@ export class StudentsComponent implements OnInit {
     const pageCount = Math.ceil(this.filterStudents.length / this.rows);
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
-  onPageChange(page: number) {
-    this.currentPage = page;
+  onPageChange(page: string) {
+    console.log(page);
+    console.log(this.pageCount);
+    if (page == 'predhodna' && this.currentPage > 1) {
+      this.currentPage -= 1;
+    } else if (page == 'sledeca' && this.currentPage < this.pageCount) {
+      this.currentPage += 1;
+    }
   }
   applyFilter(searchText: string): void {
     searchText = searchText.toLowerCase();

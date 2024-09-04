@@ -21,7 +21,4 @@ export class FormPaymentsComponent implements OnInit {
       this.paymets = payment;
     });
   }
-  deletePayment(id: number) {
-    this.paymetsService.deletePayment(id).subscribe();
-  }
 }

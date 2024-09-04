@@ -1,0 +1,12 @@
+.bg-color {
+  background-color: #cacaca;
+}
+
+.a-hover {
+  transition: transform 0.3s ease;
+}
+
+.a-hover:hover {
+  /* Hover state */
+  transform: scale(1.05); /* Scale to 110% of the original size */
+}
