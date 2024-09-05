@@ -82,20 +82,30 @@
       </tr>
     </tbody>
   </table>
-  <div class="d-flex justify-content-center">
+  <div class="custom-line">
+    <p class="nesto px-5">Ukupna plaćanja: {{ filterPayments.length }}</p>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center px-5">
     <button
       [disabled]="currentPage == 1"
-      class="btn btn-outline-secondary mx-1"
+      class="btn btn-custom mx-5 px-5"
       (click)="onPageChange('predhodna')"
     >
-      <i class="bi bi-arrow-left"></i> Predhodna
+      <i class="bi bi-caret-left"></i> Predhodna
     </button>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+      <p class="px-2 bg-light rounded text-dark fw-bold">
+        {{ currentPage }} od {{ pageCount }}
+      </p>
+    </div>
+
     <button
       [disabled]="pageCount <= currentPage"
-      class="btn btn-outline-secondary mx-1"
+      class="btn btn-custom mx-5 px-5"
       (click)="onPageChange('sledeca')"
     >
-      Sledeća <i class="bi bi-arrow-right"></i>
+      Sledeća <i class="bi bi-caret-right"></i>
     </button>
   </div>
 </div>

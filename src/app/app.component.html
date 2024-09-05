@@ -55,19 +55,12 @@
         Plaćanja
       </a>
     </div>
-    <!-- <div class="position-fixed bottom-0 start-0 m-4">{{ today }}</div> -->
+    <div class="position-fixed bottom-0 start-0 m-4 fs-4">
+      {{ today | date : "dd/MM/yyyy" }}
+    </div>
   </div>
 
   <div class="p-3 mx-auto w-100 d-flex flex-column">
-    <!-- <div class="d-flex flex-row px-4 mx-2 mb-4">
-      <input
-        class="w-100 p-4 mr-4"
-        style="height: 50px"
-        type="text"
-        placeholder="Pretraga"
-      />
-      <button class="mx-3">Pretrazi</button>
-    </div> -->
     <div class="mx-1 p-1">
       <router-outlet> </router-outlet>
     </div>

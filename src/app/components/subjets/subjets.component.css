@@ -1,0 +1,13 @@
+.btn-custom {
+  border: none; /* Removes the border */
+}
+.custom-line {
+  border-top: 2px solid black; /* Adds a top border */
+  width: 100%; /* Sets the width of the line */
+  text-align: right;
+}
+
+.nesto {
+  margin-top: 10px; /* Optional: adds space above the line */
+  margin-right: 20px; /* Aligns the line to the right */
+}

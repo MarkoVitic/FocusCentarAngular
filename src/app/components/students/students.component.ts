@@ -18,6 +18,7 @@ export class StudentsComponent implements OnInit {
   currentPage: number = 1;
   rows: number = 10;
   pageCount: number;
+  countOfStudents: number;
 
   constructor(private studentsServices: StudentsService) {}
   ngOnInit(): void {
@@ -32,6 +33,13 @@ export class StudentsComponent implements OnInit {
       .subscribe((students: any) => {
         this.students = students;
         this.filterStudents = students;
+        const uniqueProfessors = new Set<number>();
+        students.forEach((students: any) => {
+          uniqueProfessors.add(
+            students.ImePrezimeUcenika && students.ImeRoditelja
+          );
+        });
+        this.countOfStudents = uniqueProfessors.size;
       });
   }
   deleteStudent(id: number) {
@@ -39,16 +47,6 @@ export class StudentsComponent implements OnInit {
       window.location.reload();
     });
   }
-
-  // getFinalPrice() {
-  //   this.students = this.students.map((student: Students) => {
-  //     if (student.popust && student.ukupnaCijenaPrograma) {
-  //       student.ukupnaCijenaPrograma -=
-  //         (student.ukupnaCijenaPrograma * student.popust) / 100;
-  //     }
-  //     return student;
-  //   });
-  // }
 
   displayList(page: number) {
     const strat = this.rows * (page - 1);

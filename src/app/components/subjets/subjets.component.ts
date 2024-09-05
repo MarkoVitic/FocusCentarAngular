@@ -16,6 +16,7 @@ export class SubjetsComponent implements OnInit {
   currentPage: number = 1;
   rows: number = 10;
   pageCount: number;
+  countOfSubjects: number;
 
   constructor(private subjetService: SubjetsService) {}
   ngOnInit(): void {
@@ -28,6 +29,11 @@ export class SubjetsComponent implements OnInit {
 
       this.filterSubjets = subjets;
       this.pageCount = Math.ceil(this.filterSubjets.length / this.rows);
+      const uniqueProfessors = new Set<number>();
+      subjets.forEach((subjets: any) => {
+        uniqueProfessors.add(subjets.idPredmet);
+      });
+      this.countOfSubjects = uniqueProfessors.size;
     });
   }
   deleteSubject(id: number, idProfesoriPredmeti: number) {

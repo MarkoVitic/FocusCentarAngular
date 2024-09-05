@@ -17,6 +17,7 @@ export class ProfessorsComponent implements OnInit {
   currentPage: number = 1;
   rows: number = 10;
   pageCount: number;
+  countOfProfessors: number;
 
   constructor(
     private professorsService: ProfessorsService,
@@ -31,6 +32,12 @@ export class ProfessorsComponent implements OnInit {
     this.professorsService.getAllProfessors().subscribe((professors: any) => {
       this.professors = professors;
       this.filterProfessor = professors;
+
+      const uniqueProfessors = new Set<number>();
+      professors.forEach((professor: any) => {
+        uniqueProfessors.add(professor.idProfesor);
+      });
+      this.countOfProfessors = uniqueProfessors.size;
     });
   }
   editProfessor(idPredemt: number, idProfesor: number) {
@@ -85,7 +92,10 @@ export class ProfessorsComponent implements OnInit {
     searchText = searchText.toLowerCase();
 
     this.filterProfessor = this.professors.filter((professors) => {
-      return professors.ImePrezimeProfesor?.toLowerCase().includes(searchText);
+      return (
+        professors.nazivPredmeta?.toLowerCase().includes(searchText) ||
+        professors.ImePrezimeProfesor?.toLowerCase().includes(searchText)
+      );
     });
     this.statusFilter = true;
   }
