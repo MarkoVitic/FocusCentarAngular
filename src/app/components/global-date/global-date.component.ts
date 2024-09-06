@@ -12,12 +12,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class GlobalDateComponent implements OnInit {
   globalDate: GlobalDate[] = [];
+
   trenutaSkolskaGodina: Date;
   idUpdate: number;
   UpdateData: number;
 
   pocetakGodine: string;
   krajGodine: string;
+  defaultDateForQuery: GlobalDate;
 
   formGlobalDate: FormGroup = new FormGroup({});
 
@@ -41,18 +43,22 @@ export class GlobalDateComponent implements OnInit {
       // Assign the dates to the variable
       this.globalDate = dates;
 
-      // Sort the dates by the 'azurirano' property in descending order
+      // Sort the dates by the full 'azurirano' property in descending order (latest first)
       this.globalDate = this.globalDate.sort((a: any, b: any) => {
-        const dateA = new Date(a.azurirano);
-        const dateB = new Date(b.azurirano);
+        const dateA = new Date(a.azurirano).getTime(); // Get full timestamp
+        const dateB = new Date(b.azurirano).getTime(); // Get full timestamp
 
-        const timeA = dateA.getMinutes() * 60 + dateA.getSeconds(); // Convert to total seconds
-        const timeB = dateB.getMinutes() * 60 + dateB.getSeconds(); // Convert to total seconds
-
-        return timeB - timeA; // Descending order (latest time first)
+        return dateB - dateA; // Descending order (latest date first)
       });
+
+      if (this.globalDate.length > 0) {
+        this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
+        console.log(this.globalDate);
+        console.log(this.defaultDateForQuery);
+      }
     });
   }
+
   formatDateToEuropean(date: string): string {
     let datee = date.slice(0, 9);
     const [year, month, day] = datee.split('-');
@@ -89,5 +95,11 @@ export class GlobalDateComponent implements OnInit {
           window.location.reload();
         });
     }
+  }
+
+  deleteGlobalDate() {
+    this.golbalDateService.deleteGlobalDate(this.idUpdate).subscribe(() => {
+      window.location.reload();
+    });
   }
 }

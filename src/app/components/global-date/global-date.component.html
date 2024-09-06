@@ -6,7 +6,9 @@
 
   <div class="d-flex flex-column justify-content-start align-items-center p-4">
     <h3>Trenutna školska godina</h3>
-    <p *ngIf="globalDate[0]" class="fs-3">{{ globalDate[0].nazivDatuma }}</p>
+    <p *ngIf="defaultDateForQuery" class="fs-3">
+      {{ defaultDateForQuery.nazivDatuma }}
+    </p>
   </div>
 
   <form class="container mt-4">
@@ -50,8 +52,14 @@
         />
       </div>
       <div class="w-25 d-flex justify-content-start align-items-center">
-        <button class="btn btn-primary px-5" (click)="updateAzuriranoDabase()">
+        <button
+          class="btn btn-sm btn-primary mx-2 px-5"
+          (click)="updateAzuriranoDabase()"
+        >
           Izaberi
+        </button>
+        <button class="btn btn-sm btn-danger px-5" (click)="deleteGlobalDate()">
+          Izbriši
         </button>
       </div>
     </div>
@@ -127,7 +135,7 @@
         </small>
       </div>
       <div class="w-25 d-flex justify-content-start align-items-center">
-        <button class="btn btn-primary px-5">Dodaj</button>
+        <button class="btn btn-sm btn-primary px-5">Dodaj</button>
       </div>
     </div>
   </form>
