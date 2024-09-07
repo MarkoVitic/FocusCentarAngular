@@ -10,12 +10,10 @@ import { Observable } from 'rxjs';
 export class PaymentsService {
   private apiUrl = environment.apiUrl + '/payments';
 
-  private Payments: Payments[] = [];
-
   constructor(private http: HttpClient) {}
 
-  getAllPayments(): Observable<Payments[]> {
-    return this.http.get<Payments[]>(this.apiUrl);
+  getAllPayments(start: any, end: any) {
+    return this.http.get<Payments[]>(`${this.apiUrl}/${start}/${end}`);
   }
 
   getOnePayment(id: number): Observable<Payments> {

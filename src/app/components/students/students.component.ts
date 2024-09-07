@@ -3,6 +3,8 @@ import { Students } from '../../models/students';
 import { StudentsService } from '../../services/studentsService/students.service';
 
 import { Route } from '@angular/router';
+import { GlobalDateService } from '../../services/globalDateServices/global-date.service';
+import { GlobalDate } from '../../models/globalDate';
 
 @Component({
   selector: 'app-students',
@@ -20,16 +22,23 @@ export class StudentsComponent implements OnInit {
   pageCount: number;
   countOfStudents: number;
 
-  constructor(private studentsServices: StudentsService) {}
+  globalDate: GlobalDate[] = [];
+  defaultDateForQuery: GlobalDate;
+
+  constructor(
+    private studentsServices: StudentsService,
+    private globalDateService: GlobalDateService
+  ) {}
   ngOnInit(): void {
-    this.getAllStudentsWitihNameSubject();
-    this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
+    this.getAllDates();
+    // this.getAllStudentsWitihNameSubject();
+    // this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
     // this.getFinalPrice();
   }
 
-  getAllStudentsWitihNameSubject() {
+  getAllStudentsWitihNameSubject(startDate: any, endDate: any) {
     this.studentsServices
-      .getAllStudentWithNameOfSubjet()
+      .getAllStudentWithNameOfSubjet(startDate, endDate)
       .subscribe((students: any) => {
         this.students = students;
         this.filterStudents = students;
@@ -59,8 +68,6 @@ export class StudentsComponent implements OnInit {
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
   onPageChange(page: string) {
-    console.log(page);
-    console.log(this.pageCount);
     if (page == 'predhodna' && this.currentPage > 1) {
       this.currentPage -= 1;
     } else if (page == 'sledeca' && this.currentPage < this.pageCount) {
@@ -82,5 +89,29 @@ export class StudentsComponent implements OnInit {
     this.searchText = '';
     this.applyFilter('');
     this.statusFilter = false;
+  }
+
+  getAllDates() {
+    this.globalDateService.getAllDates().subscribe((dates: any[]) => {
+      // Assign the dates to the variable
+      this.globalDate = dates;
+
+      // Sort the dates by the full 'azurirano' property in descending order (latest first)
+      this.globalDate = this.globalDate.sort((a: any, b: any) => {
+        const dateA = new Date(a.azurirano).getTime(); // Get full timestamp
+        const dateB = new Date(b.azurirano).getTime(); // Get full timestamp
+
+        return dateB - dateA; // Descending order (latest date first)
+      });
+
+      if (this.globalDate.length > 0) {
+        this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
+        this.getAllStudentsWitihNameSubject(
+          this.defaultDateForQuery.pocetakGodine,
+          this.defaultDateForQuery.krajGodine
+        );
+        this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
+      }
+    });
   }
 }

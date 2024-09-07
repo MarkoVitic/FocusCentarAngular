@@ -16,9 +16,9 @@ export class FormPaymentsComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  getAllPayments() {
-    this.paymetsService.getAllPayments().subscribe((payment: any) => {
-      this.paymets = payment;
-    });
-  }
+  // getAllPayments() {
+  //   this.paymetsService.getAllPayments().subscribe((payment: any) => {
+  //     this.paymets = payment;
+  //   });
+  // }
 }

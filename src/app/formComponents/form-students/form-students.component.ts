@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subjets } from '../../models/subjets';
 import { SubjetsService } from '../../services/subjetsService/subjets.service';
+import { GlobalDate } from '../../models/globalDate';
+import { GlobalDateService } from '../../services/globalDateServices/global-date.service';
 @Component({
   selector: 'app-form-students',
   templateUrl: './form-students.component.html',
@@ -56,6 +58,7 @@ export class FormStudentsComponent implements OnInit {
   onSubmit() {
     if (this.studentForm.valid) {
       if (!this.idStudent) {
+        let value = {};
         console.log(this.studentForm.value);
         this.studentsServices
           .createStudent(this.studentForm.value)

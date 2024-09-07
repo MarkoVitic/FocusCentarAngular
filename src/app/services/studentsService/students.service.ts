@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Students } from '../../models/students';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { GlobalDate } from '../../models/globalDate';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,10 @@ export class StudentsService {
   getAllStudents(): Observable<Students[]> {
     return this.http.get<Students[]>(this.apiUrl);
   }
-  getAllStudentWithNameOfSubjet() {
-    return this.http.get<Students[]>('http://127.0.0.1:3000/studentsall');
+  getAllStudentWithNameOfSubjet(start: any, end: any) {
+    return this.http.get<Students[]>(
+      'http://127.0.0.1:3000/studentsall' + `/${start}` + `/${end}`
+    );
   }
 
   getOneStudent(id: number): Observable<Students> {

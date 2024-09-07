@@ -53,8 +53,6 @@ export class GlobalDateComponent implements OnInit {
 
       if (this.globalDate.length > 0) {
         this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
-        console.log(this.globalDate);
-        console.log(this.defaultDateForQuery);
       }
     });
   }

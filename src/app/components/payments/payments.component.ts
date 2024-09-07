@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Payments } from '../../models/payments';
 import { PaymentsService } from '../../services/paymentsService/payments.service';
 import { PaymentDetails } from '../../models/paymentsDetails';
+import { GlobalDate } from '../../models/globalDate';
+import { GlobalDateService } from '../../services/globalDateServices/global-date.service';
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -19,13 +21,19 @@ export class PaymentsComponent implements OnInit {
   rows: number = 10;
   pageCount: number;
 
-  constructor(private paymentService: PaymentsService) {}
+  globalDate: GlobalDate[] = [];
+  defaultDateForQuery: GlobalDate;
+
+  constructor(
+    private paymentService: PaymentsService,
+    private globalDateService: GlobalDateService
+  ) {}
   ngOnInit(): void {
-    this.getAllPayments();
+    this.getAllDates();
   }
 
-  getAllPayments() {
-    this.paymentService.getAllPayments().subscribe((payment: any) => {
+  getAllPayments(start: any, end: any) {
+    this.paymentService.getAllPayments(start, end).subscribe((payment: any) => {
       this.allPayments = payment.data;
       this.filterPayments = payment.data;
       this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
@@ -99,5 +107,31 @@ export class PaymentsComponent implements OnInit {
   resetDateFilter() {
     this.sortByDate('');
     this.statusDateFilter = false;
+  }
+
+  getAllDates() {
+    this.globalDateService.getAllDates().subscribe((dates: any[]) => {
+      // Assign the dates to the variable
+      this.globalDate = dates;
+      console.log(this.globalDate);
+
+      // Sort the dates by the full 'azurirano' property in descending order (latest first)
+      this.globalDate = this.globalDate.sort((a: any, b: any) => {
+        const dateA = new Date(a.azurirano).getTime(); // Get full timestamp
+        const dateB = new Date(b.azurirano).getTime(); // Get full timestamp
+
+        return dateB - dateA; // Descending order (latest date first)
+      });
+
+      if (this.globalDate.length > 0) {
+        this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
+
+        this.getAllPayments(
+          this.defaultDateForQuery.pocetakGodine,
+          this.defaultDateForQuery.krajGodine
+        );
+        this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
+      }
+    });
   }
 }

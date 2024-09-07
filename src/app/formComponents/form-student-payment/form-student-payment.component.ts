@@ -7,6 +7,8 @@ import { Payments } from '../../models/payments';
 import { PaymentsService } from '../../services/paymentsService/payments.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalDate } from '../../models/globalDate';
+import { GlobalDateService } from '../../services/globalDateServices/global-date.service';
 
 @Component({
   selector: 'app-form-student-payment',
@@ -21,15 +23,20 @@ export class FormStudentPaymentComponent implements OnInit {
   idSubject: number;
   idProfessor: number;
 
+  globalDate: GlobalDate[] = [];
+  defaultDateForQuery: GlobalDate;
+
   constructor(
     private studentsService: StudentsService,
     private subjectService: SubjetsService,
     private paymentService: PaymentsService,
     private formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private globalDateService: GlobalDateService
   ) {}
   ngOnInit(): void {
+    this.getAllDates();
     let idUcenik = this.activeRoute.snapshot.paramMap.get('idUcenik');
     if (idUcenik) {
       this.idStudent = parseInt(idUcenik);
@@ -44,6 +51,8 @@ export class FormStudentPaymentComponent implements OnInit {
       predmet: this.student?.nazivPredmeta,
       idUcenik: this.student?.idUcenik,
       idProfesoriPredmeti: this.student?.idProfesoriPredmeti,
+      starDate: this.defaultDateForQuery?.pocetakGodine,
+      endDate: this.defaultDateForQuery?.krajGodine,
     });
   }
 
@@ -52,14 +61,6 @@ export class FormStudentPaymentComponent implements OnInit {
       this.student = studentDB.data[0];
     });
   }
-
-  // getSubjectDetails(id: number, idProfessor: number) {
-  //   this.subjectService
-  //     .getOneSubjet(id, idProfessor)
-  //     .subscribe((subjectDB: any) => {
-  //       this.subject = subjectDB.data[0];
-  //     });
-  // }
 
   onSubmit() {
     if (this.formStudenPayment.valid) {
@@ -71,5 +72,29 @@ export class FormStudentPaymentComponent implements OnInit {
           this.formStudenPayment.reset(); // Reset form after successful creation
         });
     }
+  }
+
+  getAllDates() {
+    this.globalDateService.getAllDates().subscribe((dates: any[]) => {
+      // Assign the dates to the variable
+      this.globalDate = dates;
+
+      // Sort the dates by the full 'azurirano' property in descending order (latest first)
+      this.globalDate = this.globalDate.sort((a: any, b: any) => {
+        const dateA = new Date(a.azurirano).getTime(); // Get full timestamp
+        const dateB = new Date(b.azurirano).getTime(); // Get full timestamp
+
+        return dateB - dateA; // Descending order (latest date first)
+      });
+
+      if (this.globalDate.length > 0) {
+        this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
+        // this.getAllStudentsWitihNameSubject(
+        //   this.defaultDateForQuery.pocetakGodine,
+        //   this.defaultDateForQuery.krajGodine
+        // );
+        // this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
+      }
+    });
   }
 }
