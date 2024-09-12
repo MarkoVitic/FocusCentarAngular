@@ -98,22 +98,25 @@
         type="submit"
         [disabled]="subjectForm.invalid"
       >
+        <i class="bi bi-floppy mx-2"></i>
         Dodaj
       </button>
       <button
         *ngIf="idSubject"
-        class="btn btn-primary w-25 fw-bold fs-5"
+        class="btn btn-primary fw-bold fs-5"
         type="submit"
         [disabled]="subjectForm.invalid"
       >
+        <i class="bi bi-floppy mx-2"></i>
         Izmijeni
       </button>
       <button
         *ngIf="idSubject"
-        class="btn btn-secondary w-25 fw-bold fs-5 mx-4"
+        class="btn btn-secondary fw-bold fs-5 mx-4"
         type="submit"
         (click)="createInTabelProfessorsStudents()"
       >
+        <i class="bi bi-person-add mx-2"></i>
         Dodijeli predmet profesoru
       </button>
     </div>

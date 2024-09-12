@@ -24,6 +24,11 @@ export class PaymentsComponent implements OnInit {
   globalDate: GlobalDate[] = [];
   defaultDateForQuery: GlobalDate;
 
+  showModal: boolean = false;
+  idPayment: number | undefined;
+  idProfesoriPredmeti: number | undefined;
+  idStudent: number | undefined;
+
   constructor(
     private paymentService: PaymentsService,
     private globalDateService: GlobalDateService
@@ -36,8 +41,8 @@ export class PaymentsComponent implements OnInit {
     this.paymentService.getAllPayments(start, end).subscribe((payment: any) => {
       this.allPayments = payment.data;
       this.filterPayments = payment.data;
-      this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
     });
+    this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
   }
 
   deltePaymnet(id: number, idProfPred: number, idUcenk: number) {
@@ -130,8 +135,36 @@ export class PaymentsComponent implements OnInit {
           this.defaultDateForQuery.pocetakGodine,
           this.defaultDateForQuery.krajGodine
         );
-        this.pageCount = Math.ceil(this.filterPayments.length / this.rows);
       }
     });
+  }
+
+  onClickDelete(
+    idPayment?: number,
+    idProfesoriPredmeti?: number,
+    idStudent?: number
+  ) {
+    this.idPayment = idPayment;
+    this.idProfesoriPredmeti = idProfesoriPredmeti;
+    this.idStudent = idStudent;
+    this.showModal = !this.showModal;
+  }
+
+  onModalHandle(response: boolean) {
+    if (response) {
+      if (this.idPayment && this.idProfesoriPredmeti && this.idStudent) {
+        this.paymentService
+          .deletePayment(
+            this.idPayment,
+            this.idProfesoriPredmeti,
+            this.idStudent
+          )
+          .subscribe(() => {
+            window.location.reload();
+          });
+      }
+    } else {
+      this.showModal = !this.showModal;
+    }
   }
 }

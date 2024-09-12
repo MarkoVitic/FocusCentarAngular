@@ -217,6 +217,7 @@
         type="submit"
         [disabled]="studentForm.invalid"
       >
+        <i class="bi bi-floppy mx-2"></i>
         Dodaj
       </button>
       <button
@@ -225,14 +226,16 @@
         type="submit"
         [disabled]="studentForm.invalid"
       >
+        <i class="bi bi-floppy mx-2"></i>
         Izmijeni
       </button>
       <button
         *ngIf="idStudent"
-        class="btn btn-secondary w-25 fw-bold fs-5 mx-4"
+        class="btn btn-secondary fw-bold fs-5 mx-4"
         type="submit"
         (click)="addAntoherSubjectToStudent()"
       >
+        <i class="bi bi-file-plus mx-2"></i>
         Dodijeli predmet učeniku
       </button>
     </div>

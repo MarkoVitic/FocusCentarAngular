@@ -7,7 +7,7 @@
         [routerLink]="['/subjects/form']"
         class="btn btn-primary d-flex justify-content-center align-items-center mb-3"
       >
-        Dodaj predmet<i class="bi bi-plus-lg mx-2"></i>
+        <i class="bi bi-file-plus mx-2"></i> Dodaj predmet
       </button>
     </div>
 
@@ -57,7 +57,7 @@
           <button
             class="btn btn-sm btn-danger mx-1"
             (click)="
-              deleteSubject(subject.idPredmet, subject.idProfesoriPredmeti)
+              onClickDelete(subject.idPredmet, subject.idProfesoriPredmeti)
             "
           >
             <i class="bi bi-trash mx-1"></i>
@@ -115,3 +115,7 @@
     </button>
   </div>
 </div>
+<app-modals
+  *ngIf="showModal"
+  (handleModal)="onModalHandle($event)"
+></app-modals>

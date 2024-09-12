@@ -25,6 +25,9 @@ export class StudentsComponent implements OnInit {
   globalDate: GlobalDate[] = [];
   defaultDateForQuery: GlobalDate;
 
+  showModal: boolean = false;
+  idStudent: number | undefined;
+
   constructor(
     private studentsServices: StudentsService,
     private globalDateService: GlobalDateService
@@ -48,6 +51,7 @@ export class StudentsComponent implements OnInit {
             students.ImePrezimeUcenika && students.ImeRoditelja
           );
         });
+        this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
         this.countOfStudents = uniqueProfessors.size;
       });
   }
@@ -106,12 +110,30 @@ export class StudentsComponent implements OnInit {
 
       if (this.globalDate.length > 0) {
         this.defaultDateForQuery = this.globalDate[0]; // Get the first element after sorting
+
         this.getAllStudentsWitihNameSubject(
           this.defaultDateForQuery.pocetakGodine,
           this.defaultDateForQuery.krajGodine
         );
-        this.pageCount = Math.ceil(this.filterStudents.length / this.rows);
       }
     });
+  }
+
+  onClickDelete(idStudent?: number) {
+    this.idStudent = idStudent;
+    this.showModal = !this.showModal;
+  }
+
+  onModalHandle(response: boolean) {
+    console.log('Modal response:', response);
+    if (response) {
+      if (this.idStudent) {
+        this.studentsServices.deleteStudent(this.idStudent).subscribe(() => {
+          window.location.reload();
+        });
+      }
+    } else {
+      this.showModal = !this.showModal;
+    }
   }
 }

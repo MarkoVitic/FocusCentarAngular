@@ -35,8 +35,8 @@ export class SubjetsService {
   updateSubjet(id: number, subject: Subjets) {
     return this.http.put<Subjets>(this.apiUrl + `/${id}`, subject);
   }
-  deleteSubjet(idPredemt: number, idProfesor: number) {
-    return this.http.delete(this.apiUrl + `/${idPredemt}` + `/${idProfesor}`);
+  deleteSubjet(idPredemt: number) {
+    return this.http.delete(this.apiUrl + `/${idPredemt}`);
   }
 
   deleteFromSubjectProfesorTable(idProfesoriPredmeti: number) {

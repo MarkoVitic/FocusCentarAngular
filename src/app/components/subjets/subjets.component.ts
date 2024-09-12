@@ -18,6 +18,10 @@ export class SubjetsComponent implements OnInit {
   pageCount: number;
   countOfSubjects: number;
 
+  showModal: boolean = false;
+  idPredmet: number | undefined;
+  idProfesoriPredmeti: number | undefined;
+
   constructor(private subjetService: SubjetsService) {}
   ngOnInit(): void {
     this.getAllSubjets();
@@ -36,25 +40,25 @@ export class SubjetsComponent implements OnInit {
       this.countOfSubjects = uniqueProfessors.size;
     });
   }
-  deleteSubject(id: number, idProfesoriPredmeti: number) {
-    console.log(id, idProfesoriPredmeti);
+  // deleteSubject(id: number, idProfesoriPredmeti: number) {
+  //   console.log(id, idProfesoriPredmeti);
 
-    if (idProfesoriPredmeti) {
-      this.subjetService
-        .deleteFromSubjectProfesorTable(idProfesoriPredmeti)
-        .subscribe((a) => {
-          console.log(a);
-          window.location.reload();
-        });
-    } else if (!idProfesoriPredmeti) {
-      this.subjetService
-        .deleteSubjet(id, idProfesoriPredmeti)
-        .subscribe((a) => {
-          console.log(a);
-          window.location.reload();
-        });
-    }
-  }
+  //   if (idProfesoriPredmeti) {
+  //     this.subjetService
+  //       .deleteFromSubjectProfesorTable(idProfesoriPredmeti)
+  //       .subscribe((a) => {
+  //         console.log(a);
+  //         window.location.reload();
+  //       });
+  //   } else if (!idProfesoriPredmeti) {
+  //     this.subjetService
+  //       .deleteSubjet(id, idProfesoriPredmeti)
+  //       .subscribe((a) => {
+  //         console.log(a);
+  //         window.location.reload();
+  //       });
+  //   }
+  // }
   displayList(page: number) {
     const strat = this.rows * (page - 1);
     const end = strat + this.rows;
@@ -90,5 +94,32 @@ export class SubjetsComponent implements OnInit {
     this.searchText = '';
     this.applyFilter('');
     this.statusFilter = false;
+  }
+
+  onClickDelete(idPredmet?: number, idProfesoriPredmeti?: number) {
+    this.idPredmet = idPredmet;
+    this.idProfesoriPredmeti = idProfesoriPredmeti;
+    this.showModal = !this.showModal;
+  }
+
+  onModalHandle(response: boolean) {
+    console.log('Modal response:', response);
+    if (response) {
+      if (this.idProfesoriPredmeti) {
+        this.subjetService
+          .deleteFromSubjectProfesorTable(this.idProfesoriPredmeti)
+          .subscribe((a) => {
+            console.log(a);
+            window.location.reload();
+          });
+      } else if (!this.idProfesoriPredmeti && this.idPredmet) {
+        this.subjetService.deleteSubjet(this.idPredmet).subscribe((a) => {
+          console.log(a);
+          window.location.reload();
+        });
+      }
+    } else {
+      this.showModal = !this.showModal;
+    }
   }
 }

@@ -104,8 +104,8 @@ export class FormStudentsComponent implements OnInit {
       this.studentsServices
         .createStudent(this.studentForm.value)
         .subscribe(() => {
-          this.router.navigateByUrl('/students'); // Only navigate after professor is created
-          this, (this.dodjeljivanje = false);
+          this.router.navigateByUrl('/students');
+          this.dodjeljivanje = false;
           this.studentForm.reset(); // Reset form after successful creation
         });
     }

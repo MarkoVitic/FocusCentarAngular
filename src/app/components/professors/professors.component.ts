@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Professors } from '../../models/professors';
 import { ProfessorsService } from '../../services/professorService/professors.service';
 import { Router } from '@angular/router';
@@ -19,13 +19,19 @@ export class ProfessorsComponent implements OnInit {
   pageCount: number;
   countOfProfessors: number;
 
+  showModal: boolean = false;
+  idProfesor: number | undefined;
+  idProfesoriPredmeti: number | undefined;
+
+  @Input() professor: Professors = new Professors();
+  @Output() handleModal: EventEmitter<boolean> = new EventEmitter();
+
   constructor(
     private professorsService: ProfessorsService,
     private router: Router
   ) {}
   ngOnInit(): void {
     this.getAllProfessors();
-    this.pageCount = Math.ceil(this.filterProfessor.length / this.rows);
   }
 
   getAllProfessors() {
@@ -37,6 +43,8 @@ export class ProfessorsComponent implements OnInit {
       professors.forEach((professor: any) => {
         uniqueProfessors.add(professor.idProfesor);
       });
+      this,
+        (this.pageCount = Math.ceil(this.filterProfessor.length / this.rows));
       this.countOfProfessors = uniqueProfessors.size;
     });
   }
@@ -50,20 +58,6 @@ export class ProfessorsComponent implements OnInit {
       });
   }
 
-  deleteProfessor(idProfesor: number, idProfesoriPredmeti: number) {
-    console.log(idProfesoriPredmeti, idProfesor);
-    if (idProfesoriPredmeti) {
-      this.professorsService
-        .deleteFromProdessorSubjet(idProfesoriPredmeti)
-        .subscribe(() => {
-          window.location.reload();
-        });
-    } else if (!idProfesoriPredmeti) {
-      this.professorsService.deleteProfessor(idProfesor).subscribe(() => {
-        window.location.reload();
-      });
-    }
-  }
   createProfessor(professor: Professors) {
     this.professorsService.createProfessor(professor).subscribe();
   }
@@ -104,5 +98,33 @@ export class ProfessorsComponent implements OnInit {
     this.searchText = '';
     this.applyFilter('');
     this.statusFilter = false;
+  }
+
+  onClickDelete(idProfesor?: number, idProfesoriPredmeti?: number) {
+    this.idProfesor = idProfesor;
+    this.idProfesoriPredmeti = idProfesoriPredmeti;
+    this.showModal = !this.showModal;
+  }
+
+  onModalHandle(response: boolean) {
+    console.log('Modal response:', response);
+    if (response) {
+      if (this.idProfesoriPredmeti) {
+        console.log(this.idProfesoriPredmeti);
+        this.professorsService
+          .deleteFromProdessorSubjet(this.idProfesoriPredmeti)
+          .subscribe(() => {
+            window.location.reload();
+          });
+      } else if (!this.idProfesoriPredmeti && this.idProfesor) {
+        this.professorsService
+          .deleteProfessor(this.idProfesor)
+          .subscribe(() => {
+            window.location.reload();
+          });
+      }
+    } else {
+      this.showModal = !this.showModal;
+    }
   }
 }

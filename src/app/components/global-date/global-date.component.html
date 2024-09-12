@@ -2,7 +2,7 @@
   class="d-flex flex-column justify-content-start align-items-center p-4"
   style="min-height: 100vh"
 >
-  <h1 class="container text-center p-4 fw-bold mt-4">Fokus Centra</h1>
+  <h1 class="text-center p-4 fw-bold mt-4">Fokus Centra</h1>
 
   <div class="d-flex flex-column justify-content-start align-items-center p-4">
     <h3>Trenutna školska godina</h3>
@@ -53,13 +53,13 @@
       </div>
       <div class="w-25 d-flex justify-content-start align-items-center">
         <button
-          class="btn btn-sm btn-primary mx-2 px-5"
+          class="btn btn-sm btn-primary mx-2 px-4"
           (click)="updateAzuriranoDabase()"
         >
-          Izaberi
+          <i class="bi bi-floppy"></i> Izaberi
         </button>
-        <button class="btn btn-sm btn-danger px-5" (click)="deleteGlobalDate()">
-          Izbriši
+        <button class="btn btn-sm btn-danger px-4" (click)="deleteGlobalDate()">
+          <i class="bi bi-trash mx-1"></i> Izbriši
         </button>
       </div>
     </div>
@@ -135,7 +135,9 @@
         </small>
       </div>
       <div class="w-25 d-flex justify-content-start align-items-center">
-        <button class="btn btn-sm btn-primary px-5">Dodaj</button>
+        <button class="btn btn-sm btn-primary px-3">
+          <i class="bi bi-plus-lg mx-2"></i> Dodaj
+        </button>
       </div>
     </div>
   </form>
